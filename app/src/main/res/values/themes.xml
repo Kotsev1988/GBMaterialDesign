@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.GBMaterialDesign" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorOnSecondaryContainer">#8BC34A</item>
+<!--        <item name="colorOnSurface">#B7AB3A</item>-->
+        <item name="chipStyle">@style/MyChip</item>
+        <item name="textInputOutlinedStyle">@style/MyText</item>
+<!--        <item name="colorOnSurfaceVariant">#E91E63</item>-->
+
+    </style>
+
+    <style name="Theme.GBMaterialDesign" parent="Base.Theme.GBMaterialDesign" />
+    
+    <style name="MyChip" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">#EF4646</item>
+        <item name="rippleColor">#085797</item>
+    </style>
+
+    <style name="MyText" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="helperTextTextColor">#9701C0</item>
+        <item name="boxBackgroundColor">#FFE500</item>
+        <item name="colorOnSurface">#0C0300</item>
+
+
+    </style>
+</resources>
