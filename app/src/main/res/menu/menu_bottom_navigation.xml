@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="none"
+    android:id="@+id/group_menu"
+
+    >
+
+    <item
+        android:id="@+id/navigation1"
+        android:title="На экран 1"/>
+    <item
+        android:id="@+id/navigation2"
+        android:title="На экран 2"/>
+
+</group>
+
+    <group android:checkableBehavior="none">
+        ">
+        <item
+            android:id="@+id/navigation3"
+            android:title="На экран 3"/>
+        <item
+            android:id="@+id/navigation4"
+            android:title="На экран 4"/>
+
+    </group>
+</menu>

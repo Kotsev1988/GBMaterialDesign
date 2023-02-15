@@ -8,10 +8,10 @@ import android.widget.Toast
 import com.example.gbmaterialdesign.databinding.BottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class MyBottomSheetDialog: BottomSheetDialogFragment() {
+class MyBottomSheetDialog : BottomSheetDialogFragment() {
+
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,11 +26,10 @@ class MyBottomSheetDialog: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getString(BUNDLE_EXTRA).let {
-            if (it !=null){
+            if (it != null) {
                 binding.bottomSheetDescription.text = it
             }
         }
-
 
         binding.dialogButton.setOnClickListener {
             dismiss()
@@ -56,9 +55,4 @@ class MyBottomSheetDialog: BottomSheetDialogFragment() {
             return fragment
         }
     }
-
-
-
-
-
 }

@@ -3,9 +3,7 @@ package com.example.gbmaterialdesign.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.example.gbmaterialdesign.BottomNavigationDrawer
+import com.example.gbmaterialdesign.MainActivity
 import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.databinding.FragmentPictureBinding
 import com.example.gbmaterialdesign.ui.AppSatates.AppState
@@ -23,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -46,33 +47,9 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
 
         val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
-
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescriptionHeader).text =
-                            "Открыть"
-                    }
-
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescriptionHeader).text =
-                            "Закрыть"
-                    }
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                println("On Slide")
-            }
-        })
 
         binding.textInputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -113,12 +90,43 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         }
+
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+        when (item.itemId) {
+
+            R.id.action_settings -> activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.container1, SettingsFragment())
+                ?.addToBackStack(null)
+                ?.commit()
+
+            R.id.action_favorite -> {
+
+            }
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawer().show(it.supportFragmentManager, "tag")
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun renderData(it: AppState) {
 
         when (it) {
             is AppState.Success -> {
+
                 binding.frameLoading.visibility = View.GONE
                 binding.pictureOfDay.load(
                     it.pictureOfTheDay.url
@@ -135,7 +143,6 @@ class PictureOfTheDayFragment : Fragment() {
 
                     myBottomDialog.show(childFragmentManager, MyBottomSheetDialog.TAG)
                 }
-                binding.description.text = it.pictureOfTheDay.explanation
 
             }
             is AppState.Error -> {
@@ -154,6 +161,7 @@ class PictureOfTheDayFragment : Fragment() {
                         }
                     )
                 }
+
             }
             is AppState.Loading -> {
                 binding.frameLoading.visibility = View.VISIBLE
