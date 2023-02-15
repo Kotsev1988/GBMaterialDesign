@@ -39,5 +39,4 @@ com_crashlytics_export_strings.xml
 local.properties
 project.properties
 app.properties
-api.properties
 *.p12
