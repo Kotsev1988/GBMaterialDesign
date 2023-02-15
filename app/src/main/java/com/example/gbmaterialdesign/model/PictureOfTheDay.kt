@@ -1,6 +1,7 @@
 package com.example.gbmaterialdesign.model
 
 data class PictureOfTheDay(
+
     val copyright: String,
     val date: String,
     val explanation: String,
@@ -9,4 +10,5 @@ data class PictureOfTheDay(
     val service_version: String,
     val title: String,
     val url: String
+
 )
