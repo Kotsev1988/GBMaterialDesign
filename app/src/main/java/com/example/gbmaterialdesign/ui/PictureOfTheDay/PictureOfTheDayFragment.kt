@@ -1,24 +1,20 @@
-package com.example.gbmaterialdesign.ui
+package com.example.gbmaterialdesign.ui.PictureOfTheDay
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
-import com.example.gbmaterialdesign.BottomNavigationDrawer
-import com.example.gbmaterialdesign.MainActivity
 import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.databinding.FragmentPictureBinding
 import com.example.gbmaterialdesign.ui.AppSatates.AppState
-import com.example.gbmaterialdesign.ui.viewModel.MainViewModel
+import com.example.gbmaterialdesign.ui.MyBottomSheetDialog
+import com.example.gbmaterialdesign.ui.viewModel.PictureOfTheDayViewModel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -91,35 +87,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
         }
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_main, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-
-        when (item.itemId) {
-
-            R.id.action_settings -> activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container1, SettingsFragment())
-                ?.addToBackStack(null)
-                ?.commit()
-
-            R.id.action_favorite -> {
-
-            }
-            android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawer().show(it.supportFragmentManager, "tag")
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun renderData(it: AppState) {
@@ -154,14 +122,13 @@ class PictureOfTheDayFragment : Fragment() {
                     binding.main.showSnackBar(
                         it1,
                         getString(R.string.reload),
-
                         {
                             val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
                             viewModel.sendRequest(dateFormat.format(Date()))
+
                         }
                     )
                 }
-
             }
             is AppState.Loading -> {
                 binding.frameLoading.visibility = View.VISIBLE
@@ -169,13 +136,9 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-    fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
     }
 
@@ -183,14 +146,15 @@ class PictureOfTheDayFragment : Fragment() {
         text: String,
         actionText: String,
         action: (View) -> Unit,
+
         length: Int = Snackbar.LENGTH_INDEFINITE,
     ) {
-        Snackbar.make(this, text, length).setAction(actionText, action).show()
+        Snackbar.make(this, text, length).setAction(actionText, action)
     }
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
-        private var isMain = true
+
     }
 
 }

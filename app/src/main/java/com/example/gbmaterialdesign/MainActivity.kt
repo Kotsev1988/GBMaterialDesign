@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         setTheme(getRealStyleLocal(getCurrentThemeLocal()))
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
     }
 
