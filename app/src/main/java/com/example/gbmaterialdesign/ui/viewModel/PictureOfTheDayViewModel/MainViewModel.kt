@@ -3,10 +3,10 @@ package com.example.gbmaterialdesign.ui.viewModel.PictureOfTheDayViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.gbmaterialdesign.data.RepositoryImpl
-import com.example.gbmaterialdesign.data.RetrofitClient
+import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RepositoryImpl
+import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RetrofitClient
 import com.example.gbmaterialdesign.model.PictureOfTheDay
-import com.example.gbmaterialdesign.model.Repository
+import com.example.gbmaterialdesign.model.repository.Repository
 import com.example.gbmaterialdesign.ui.AppSatates.AppState
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,5 +1,6 @@
-package com.example.gbmaterialdesign.model
+package com.example.gbmaterialdesign.model.repository
 
+import com.example.gbmaterialdesign.model.PictureOfTheDay
 import retrofit2.Callback
 
 interface Repository {

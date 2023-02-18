@@ -9,7 +9,8 @@ import com.example.gbmaterialdesign.databinding.BaseFragmentBinding
 import com.example.gbmaterialdesign.ui.Earth.EarthFragment
 import com.example.gbmaterialdesign.ui.Mars.MarsFragment
 import com.example.gbmaterialdesign.ui.PictureOfTheDay.PictureOfTheDayFragment
-import com.example.gbmaterialdesign.ui.SystemFragment
+import com.example.gbmaterialdesign.ui.SolarSystem.SystemFragment
+
 
 class BaseFragment(): Fragment() {
 
@@ -54,18 +55,16 @@ class BaseFragment(): Fragment() {
                 }
                 else -> true
             }
-
         }
 
         binding.bottomNavigationView.selectedItemId = R.id.bottom_home
     }
 
-    private fun navigateTo(fragmnet: Fragment) {
+    private fun navigateTo(fragment: Fragment) {
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.baseFragmentContainer, fragmnet)
+            .replace(R.id.baseFragmentContainer, fragment)
             .addToBackStack("")
             .commit()
-
     }
 }

@@ -13,8 +13,7 @@
         <item name="floatingActionButtonStyle">@style/MyFab</item>
         <item name="bottomAppBarStyle">@style/MyBottomAppBarStyle</item>
         <item name="textAppearanceBody2">@style/MyTextAppearanceAppTheme</item>
-
-
+        <item name="bottomNavigationStyle">@style/MyBottomNavBar</item>
     </style>
 
     <style name="Theme.GBMaterialDesign" parent="Base.Theme.GBMaterialDesign" />
@@ -67,6 +66,14 @@
         <item name="backgroundTint">#9070CA</item>
         <item name="navigationIconTint">#CDBAEF</item>
     </style>
+
+    <style name="MyBottomNavBar" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">#5D99C8</item>
+        <item name="itemTextAppearanceActive">@style/MyText</item>
+        <item name="itemRippleColor">#043D6A</item>
+    </style>
+
+
 
     <style name="AppTheme" parent="Base.Theme.GBMaterialDesign">
 

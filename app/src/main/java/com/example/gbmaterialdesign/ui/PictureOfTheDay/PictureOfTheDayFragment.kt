@@ -86,8 +86,6 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     private fun renderData(it: AppState) {
@@ -154,7 +152,6 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
-
     }
 
 }

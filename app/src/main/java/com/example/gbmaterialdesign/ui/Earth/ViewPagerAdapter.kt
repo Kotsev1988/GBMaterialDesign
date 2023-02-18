@@ -1,14 +1,20 @@
 package com.example.gbmaterialdesign.ui.Earth
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.gbmaterialdesign.ui.Mars.MarsFragment
+import com.example.gbmaterialdesign.ui.Earth.DaysFragment.Companion.BUNDLE_DAY
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ViewPagerAdapter(fm: Fragment): FragmentStateAdapter(fm) {
 
 
+    private val days = arrayOf("dby", "yesterday", "today")
+    val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
     override fun getItemCount(): Int {
-        return 3
+        return days.size
     }
 
 
@@ -16,17 +22,41 @@ class ViewPagerAdapter(fm: Fragment): FragmentStateAdapter(fm) {
        return when (position) {
 
             0 -> {
-                TodayFragment()
+                val bundle = Bundle()
+
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DATE, -2)
+                val dayBeforeYesterday = dateFormat.format(calendar.time)
+                bundle.putString(BUNDLE_DAY, dayBeforeYesterday)
+                DaysFragment.newInstance(bundle)
             }
 
             1 -> {
-                YesterdayFragment()
+                val bundle = Bundle()
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DATE, -3)
+                val yesterday = dateFormat.format(calendar.time)
+                bundle.putString(BUNDLE_DAY, yesterday)
+                DaysFragment.newInstance(bundle)
             }
 
             2 -> {
-                DayBeforeYesterdayFragment()
+                val bundle = Bundle()
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DATE, -4)
+                val yesterday1 = dateFormat.format(calendar.time)
+                bundle.putString(BUNDLE_DAY, yesterday1)
+                DaysFragment.newInstance(bundle)
             }
-            else -> MarsFragment()
+
+            else ->{
+                val bundle = Bundle()
+                val currentDate = dateFormat.format(Date())
+                bundle.putString(BUNDLE_DAY, currentDate)
+                DaysFragment.newInstance(bundle)
+            }
         }
     }
+
+
 }
