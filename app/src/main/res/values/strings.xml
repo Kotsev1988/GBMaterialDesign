@@ -18,4 +18,8 @@
     <string name="mars">Mars</string>
     <string name="system">System</string>
     <string name="home">Home</string>
+    <string name="image">image</string>
+    <string name="rover">rover</string>
+    <string name="sol">sol</string>
+    <string name="hide_3_button_using_groups">hide 3 button using groups</string>
 </resources>

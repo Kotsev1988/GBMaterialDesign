@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.bumptech.glide.Glide
 import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.RetrofitEarthClient
@@ -79,6 +80,7 @@ class DaysFragment : Fragment() {
                 }.replace("-","/")
 
                 val url = "https://epic.gsfc.nasa.gov/archive/natural/"+earth_date+"/png/"+picture+".png"
+
 
                     binding.todayPicture.load(
                         url

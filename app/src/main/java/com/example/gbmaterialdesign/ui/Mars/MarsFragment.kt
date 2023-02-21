@@ -32,6 +32,7 @@ class MarsFragment : Fragment() {
 
     private var _binding: FragmentMarsBinding? = null
     private val binding get() = _binding!!
+    private var flag : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class MarsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentMarsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,22 +54,48 @@ class MarsFragment : Fragment() {
         })
 
         viewModel.getMarsPicture()
+
+        binding.hideButtons.setOnClickListener {
+            if (flag) {
+                binding.groups.visibility = View.INVISIBLE
+                flag = !flag
+            }else{
+                binding.groups.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun renderData(it: AppStateMars) {
 
         when (it) {
             is AppStateMars.Success -> {
+
+                val mars = it.marsPicture
+
                 binding.frameLoadingMars.visibility = View.GONE
 
-                val picture = it.marsPicture.photos?.get(0)?.img_src
-                binding.marsRover.text = it.marsPicture.photos?.get(0)?.rover?.name.toString()
+                binding.imageButton.setOnClickListener { view ->
+                    val picture = mars.photos.get(0).img_src
+                    binding.marsRover.text = mars.photos.get(0)?.rover?.name.toString()
 
-                binding.marsPicture.load(
-                    picture
-                ){
-                    lifecycle(this@MarsFragment)
+                    binding.marsPicture.load(
+                        picture
+                    ){
+                        lifecycle(this@MarsFragment)
+                    }
                 }
+
+                binding.roverButton.setOnClickListener {
+                  binding.marsDescription.text =  mars.photos.get(0).rover.name +" "
+                          mars.photos.get(0).rover.status+ " "+mars.photos.get(0).rover.launch_date
+                }
+
+                binding.solButton.setOnClickListener {
+                    binding.marsDescription.text =mars.photos.get(0).rover.name + " "+
+                    mars.photos.get(0).rover.status + " "+mars.photos.get(0).rover.landing_date
+                }
+
+
             }
             is AppStateMars.Error -> {
 

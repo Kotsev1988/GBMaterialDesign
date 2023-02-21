@@ -14,6 +14,7 @@ import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RetrofitClient
 import com.example.gbmaterialdesign.data.Retrofits.SystemRetrofit.SolarSystemImpl
 import com.example.gbmaterialdesign.databinding.FragmentMarsBinding
 import com.example.gbmaterialdesign.databinding.FragmentSystemBinding
+import com.example.gbmaterialdesign.model.PictureOfTheDay
 import com.example.gbmaterialdesign.model.SolarSystemWeather.SolarSystemWeather
 import com.example.gbmaterialdesign.model.repository.MarsRepository
 import com.example.gbmaterialdesign.model.repository.SolarSystemRepository
@@ -21,6 +22,7 @@ import com.example.gbmaterialdesign.ui.AppSatates.AppStateEarth
 import com.example.gbmaterialdesign.ui.AppSatates.AppStateSolarSystem
 import com.example.gbmaterialdesign.ui.Earth.DaysFragment
 import com.example.gbmaterialdesign.ui.Mars.MarsFragment
+import com.example.gbmaterialdesign.ui.PictureOfTheDay.PictureOfTheDayFragment
 import com.example.gbmaterialdesign.ui.viewModel.EarthViewModel.EarthViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,6 +58,7 @@ class SystemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
        viewModel.getSolarSystemLiveData().observe(viewLifecycleOwner, Observer {
            renderData(it)
        })
@@ -69,13 +72,14 @@ class SystemFragment : Fragment() {
 
         viewModel.getEarthData(dayBeforeYesterday, yesterday)
 
+
     }
 
     private fun renderData(it: AppStateSolarSystem) {
 
         when (it) {
             is AppStateSolarSystem.Success -> {
-                binding.frameLoadingSS.visibility = View.GONE
+               binding.frameLoadingSS.visibility = View.GONE
 
                 binding.systemText.text = it.solarSystemWeather.get(0).messageBody
 

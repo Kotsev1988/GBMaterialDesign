@@ -1,6 +1,6 @@
 package com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit
 
-import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RetrofitApi
+
 import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -14,7 +14,6 @@ import java.io.IOException
 class RetrofitEarthClient {
 
     private val baseURL = "https://epic.gsfc.nasa.gov/"
-
 
     private fun apiRetrofit(baseUrl1: String): Retrofit {
         return Retrofit.Builder()
@@ -35,7 +34,6 @@ class RetrofitEarthClient {
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(interceptor)
         httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-
         return httpClient.build()
     }
 
