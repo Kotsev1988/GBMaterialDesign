@@ -11,20 +11,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:layout_constraintStart_toEndOf="@id/barrier"
+        app:layout_constraintStart_toEndOf="@id/barrierFirst"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <com.example.gbmaterialdesign.ui.utils.MyImageView
-        android:id="@+id/mars_picture"
+        android:id="@+id/marsPicture"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/barrier"
+        app:layout_constraintStart_toEndOf="@id/barrierFirst"
         app:layout_constraintTop_toBottomOf="@+id/marsRover"
-        app:layout_constraintBottom_toTopOf="@id/barrier2"
+        app:layout_constraintBottom_toTopOf="@id/barrierSecond"
         />
 
     <androidx.constraintlayout.widget.Group
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/barrier"
+        app:layout_constraintEnd_toEndOf="@id/barrierFirst"
         app:constraint_referenced_ids="imageButton, roverButton, solButton"
         />
 
@@ -74,14 +74,14 @@
         android:text="@string/hide_3_button_using_groups"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/solButton"
-        app:layout_constraintBottom_toTopOf="@id/barrier2"
+        app:layout_constraintBottom_toTopOf="@id/barrierSecond"
         app:layout_constraintWidth_percent="0.3"
         />
 
 
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
+        android:id="@+id/barrierFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
@@ -89,7 +89,7 @@
         />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
+        android:id="@+id/barrierSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
@@ -103,8 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/barrier2"
-        app:layout_constraintStart_toEndOf="@id/barrier"
+        app:layout_constraintTop_toTopOf="@id/barrierSecond"
+        app:layout_constraintStart_toEndOf="@id/barrierFirst"
         />
 
 

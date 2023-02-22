@@ -75,8 +75,8 @@ class MarsFragment : Fragment() {
                 binding.frameLoadingMars.visibility = View.GONE
 
                 binding.imageButton.setOnClickListener { view ->
-                    val picture = mars.photos.get(0).img_src
-                    binding.marsRover.text = mars.photos.get(0)?.rover?.name.toString()
+                    val picture = mars.photos[0].img_src
+                    binding.marsRover.text = mars.photos[0].rover.name.toString()
 
                     binding.marsPicture.load(
                         picture
@@ -86,7 +86,9 @@ class MarsFragment : Fragment() {
                 }
 
                 binding.roverButton.setOnClickListener {
+
                   binding.marsDescription.text =  mars.photos.get(0).rover.name +" "
+                    
                           mars.photos.get(0).rover.status+ " "+mars.photos.get(0).rover.launch_date
                 }
 

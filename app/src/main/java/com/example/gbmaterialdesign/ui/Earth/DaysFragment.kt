@@ -32,7 +32,7 @@ class DaysFragment : Fragment() {
 
     private var _binding: FragmentDaysBinding? = null
     private val binding get() = _binding!!
-    private var argument: String =""
+    private var argument: String = ""
 
     private val viewModel by lazy {
         ViewModelProvider(this)[EarthViewModel::class.java]
@@ -41,7 +41,7 @@ class DaysFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getString(BUNDLE_DAY).let {
-            if (it!=null){
+            if (it != null) {
                 argument = it
             }
         }
@@ -77,18 +77,19 @@ class DaysFragment : Fragment() {
 
                 earth_date = earth[0].date.let {
                     it.substring(0, it.indexOf(" "))
-                }.replace("-","/")
+                }.replace("-", "/")
 
-                val url = "https://epic.gsfc.nasa.gov/archive/natural/"+earth_date+"/png/"+picture+".png"
+                val url =
+                    "https://epic.gsfc.nasa.gov/archive/natural/" + earth_date + "/png/" + picture + ".png"
 
 
-                    binding.todayPicture.load(
-                        url
-                    ){
-                        lifecycle(this@DaysFragment)
-                        crossfade(true)
-                    }
-                binding.dateOfPicture.text = it.earthPicture.get(0).caption + " "+earth_date
+                binding.todayPicture.load(
+                    url
+                ) {
+                    lifecycle(this@DaysFragment)
+                    crossfade(true)
+                }
+                binding.dateOfPicture.text = it.earthPicture.get(0).caption + " " + earth_date
             }
             is AppStateEarth.Error -> {
 
@@ -108,7 +109,7 @@ class DaysFragment : Fragment() {
 
     companion object {
         const val BUNDLE_DAY = "Day"
-        fun newInstance(bundle: Bundle): DaysFragment{
+        fun newInstance(bundle: Bundle): DaysFragment {
 
             val fragment = DaysFragment()
             fragment.arguments = bundle

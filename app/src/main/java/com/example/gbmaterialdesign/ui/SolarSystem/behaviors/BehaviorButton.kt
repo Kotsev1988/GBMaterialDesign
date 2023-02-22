@@ -16,7 +16,7 @@ class BehaviorButton(context: Context, attributeSet: AttributeSet): CoordinatorL
         child: View,
         dependency: View
     ): Boolean {
-        return  (dependency.id == R.id.main_app_bar)
+        return  (dependency.id == R.id.mainAppBar)
     }
 
     override fun onDependentViewChanged(
@@ -25,7 +25,7 @@ class BehaviorButton(context: Context, attributeSet: AttributeSet): CoordinatorL
         dependency: View
     ): Boolean {
 
-        if (dependency.id == R.id.main_app_bar){
+        if (dependency.id == R.id.mainAppBar){
 
             child.y = dependency.y+(dependency.height-child.height/2)
             child.x = (dependency.width - child.width ).toFloat()

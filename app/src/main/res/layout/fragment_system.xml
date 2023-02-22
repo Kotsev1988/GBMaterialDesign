@@ -8,7 +8,7 @@
     tools:context=".ui.Mars.MarsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/main_app_bar"
+        android:id="@+id/mainAppBar"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="#5B98C8"
@@ -16,7 +16,7 @@
         >
 
        <com.google.android.material.appbar.CollapsingToolbarLayout
-           android:id="@+id/collapsing_toolbar"
+           android:id="@+id/collapsingToolbar"
            android:layout_height="match_parent"
            android:layout_width="match_parent"
            app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -24,10 +24,27 @@
            app:expandedTitleMarginEnd="64dp"
            app:toolbarId="@id/toolbar"
            >
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:fitsSystemWindows="true"
+               >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/system_fragment"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
            <androidx.appcompat.widget.Toolbar
                android:id="@+id/toolbar"
                android:layout_width="match_parent"
-               android:layout_height="?attr/actionBarSize"/>
+               android:layout_height="?attr/actionBarSize"
+               app:layout_collapseMode="pin"
+               />
 
        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -36,11 +53,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior=".ui.SolarSystem.behaviors.MyBehavior"
-
         >
 
         <TextView
-            android:id="@+id/system_text"
+            android:id="@+id/systemText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp" />

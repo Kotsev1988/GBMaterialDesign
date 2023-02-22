@@ -21,13 +21,13 @@
     <style name="MyChip" parent="Widget.Material3.Chip.Suggestion">
         <item name="textAppearanceTitleMedium">@style/MyTextAppearance</item>
         <item name="textAppearanceBodySmall">@style/MyTextAppearance</item>
-        <item name="chipBackgroundColor">#2196F3</item>
-        <item name="rippleColor">#2569A1</item>
+        <item name="chipBackgroundColor">#95CBF6</item>
+        <item name="rippleColor">#418FCF</item>
         <item name="shapeAppearanceOverlay">@style/MyShapeAppearance</item>
     </style>
 
     <style name="MyText" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="helperTextTextColor">#9701C0</item>
+        <item name="helperTextTextColor">#8BE48E</item>
         <item name="boxBackgroundColor">#DAD28E</item>
         <item name="colorOnSurface">#0C0300</item>
         <item name="placeholderTextAppearance">@style/MyTextAppearance</item>
@@ -72,8 +72,6 @@
         <item name="itemTextAppearanceActive">@style/MyText</item>
         <item name="itemRippleColor">#043D6A</item>
     </style>
-
-
 
     <style name="AppTheme" parent="Base.Theme.GBMaterialDesign">
 
