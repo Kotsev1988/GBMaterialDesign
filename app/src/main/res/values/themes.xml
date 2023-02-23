@@ -10,7 +10,7 @@
         <item name="textInputOutlinedStyle">@style/MyText</item>
         <item name="chipStyle">@style/MyChip</item>
         <item name="editTextStyle">@style/MyText</item>
-        <item name="floatingActionButtonStyle">@style/MyFab</item>
+<!--        <item name="floatingActionButtonStyle">@style/MyFab</item>-->
         <item name="bottomAppBarStyle">@style/MyBottomAppBarStyle</item>
         <item name="textAppearanceBody2">@style/MyTextAppearanceAppTheme</item>
         <item name="bottomNavigationStyle">@style/MyBottomNavBar</item>

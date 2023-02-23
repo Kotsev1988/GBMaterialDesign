@@ -1,12 +1,21 @@
 package com.example.gbmaterialdesign.ui.Earth
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.Fade
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.load
 import com.bumptech.glide.Glide
 import com.example.gbmaterialdesign.R
@@ -33,6 +42,7 @@ class DaysFragment : Fragment() {
     private var _binding: FragmentDaysBinding? = null
     private val binding get() = _binding!!
     private var argument: String = ""
+    var flag = false
 
     private val viewModel by lazy {
         ViewModelProvider(this)[EarthViewModel::class.java]
@@ -83,12 +93,50 @@ class DaysFragment : Fragment() {
                     "https://epic.gsfc.nasa.gov/archive/natural/" + earth_date + "/png/" + picture + ".png"
 
 
+                val transitionSet = TransitionSet()
+                val fade = Fade()
+                fade.duration = 2000
+                val bounds = ChangeBounds()
+                bounds.duration = 2000
+                transitionSet.addTransition(fade)
+                transitionSet.addTransition(bounds)
+                val slide = Slide(Gravity.END)
+                transitionSet.addTransition(slide)
+                val changeImageTransform = ChangeImageTransform()
+
+
+                TransitionManager.beginDelayedTransition(binding.daysContainer, transitionSet)
                 binding.todayPicture.load(
                     url
                 ) {
+
                     lifecycle(this@DaysFragment)
                     crossfade(true)
                 }
+                val params: ViewGroup.LayoutParams = binding.todayPicture.layoutParams
+                var scaleType: ImageView.ScaleType
+
+
+
+                binding.todayPicture.setOnClickListener {
+
+
+                    flag=!flag
+                    if (flag){
+                        it.animate().alpha(1f).setDuration(3000).start()
+
+                        params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+
+                    }else{
+
+                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        scaleType = ImageView.ScaleType.FIT_CENTER
+                    }
+                    binding.todayPicture.layoutParams = params
+                    binding.todayPicture.scaleType = scaleType
+                }
+
                 binding.dateOfPicture.text = it.earthPicture.get(0).caption + " " + earth_date
             }
             is AppStateEarth.Error -> {

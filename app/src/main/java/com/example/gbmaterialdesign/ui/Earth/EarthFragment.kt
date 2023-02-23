@@ -13,6 +13,7 @@ import com.example.gbmaterialdesign.databinding.FragmentEarthBinding
 import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
 import com.example.gbmaterialdesign.model.repository.EarthRepository
 import com.example.gbmaterialdesign.model.repository.Repository
+import com.example.gbmaterialdesign.ui.Earth.viewPagerAnimation.DaysFragmentAnimation
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,7 +40,9 @@ class EarthFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewPager.setPageTransformer(DaysFragmentAnimation())
         binding.viewPager.adapter = ViewPagerAdapter(this)
+
         setTabs()
     }
 

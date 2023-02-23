@@ -1,5 +1,8 @@
 package com.example.gbmaterialdesign.ui.Mars
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.TransitionManager
 import coil.load
 import com.bumptech.glide.Glide
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
@@ -32,7 +36,7 @@ class MarsFragment : Fragment() {
 
     private var _binding: FragmentMarsBinding? = null
     private val binding get() = _binding!!
-    private var flag : Boolean = true
+    private var flag : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +67,67 @@ class MarsFragment : Fragment() {
                 binding.groups.visibility = View.VISIBLE
             }
         }
+
+        binding.optionOne.apply {
+            alpha = 0f
+        }
+
+        binding.optionTwo.apply {
+            alpha = 0f
+        }
+
+
+
+        binding.fab.setOnClickListener {
+
+            flag = !flag
+            if (flag){
+                ObjectAnimator.ofFloat(binding.plusIcon, View.ROTATION, 0f, 225f).start()
+                ObjectAnimator.ofFloat(binding.optionOne, View.TRANSLATION_Y, -130f).start()
+                ObjectAnimator.ofFloat(binding.optionTwo, View.TRANSLATION_Y, -250f).start()
+
+                binding.optionOne.animate().alpha(1f).setDuration(2000).setListener(
+                    object : AnimatorListenerAdapter(){
+                        override fun onAnimationEnd(animation: Animator) {
+                            binding.optionOne.isClickable = true
+
+                        }
+                    }
+                )
+
+                binding.optionTwo.animate().alpha(1f).setDuration(2000).setListener(
+                    object : AnimatorListenerAdapter(){
+                        override fun onAnimationEnd(animation: Animator) {
+                            binding.optionTwo.isClickable = true
+
+                        }
+                    }
+                )
+
+            }else{
+                ObjectAnimator.ofFloat(binding.plusIcon, View.ROTATION, 225f, 0f).start()
+                ObjectAnimator.ofFloat(binding.optionOne, View.TRANSLATION_Y, 0f).start()
+                ObjectAnimator.ofFloat(binding.optionTwo, View.TRANSLATION_Y, 0f).start()
+
+                binding.optionOne.animate().alpha(0f).setDuration(1000).setListener(
+                    object : AnimatorListenerAdapter(){
+                        override fun onAnimationEnd(animation: Animator) {
+                            binding.optionOne.isClickable = false
+
+                        }
+                    }
+                )
+
+                binding.optionTwo.animate().alpha(0f).setDuration(1000).setListener(
+                    object : AnimatorListenerAdapter(){
+                        override fun onAnimationEnd(animation: Animator) {
+                            binding.optionTwo.isClickable = false
+
+                        }
+                    }
+                )
+            }
+        }
     }
 
     private fun renderData(it: AppStateMars) {
@@ -78,6 +143,7 @@ class MarsFragment : Fragment() {
                     val picture = mars.photos[0].img_src
                     binding.marsRover.text = mars.photos[0].rover.name.toString()
 
+
                     binding.marsPicture.load(
                         picture
                     ){
@@ -88,7 +154,6 @@ class MarsFragment : Fragment() {
                 binding.roverButton.setOnClickListener {
 
                   binding.marsDescription.text =  mars.photos.get(0).rover.name +" "
-                    
                           mars.photos.get(0).rover.status+ " "+mars.photos.get(0).rover.launch_date
                 }
 

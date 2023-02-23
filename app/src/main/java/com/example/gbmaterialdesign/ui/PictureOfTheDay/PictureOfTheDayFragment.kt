@@ -4,17 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.TransitionManager
 import coil.load
 import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.databinding.FragmentPictureBinding
 import com.example.gbmaterialdesign.ui.AppSatates.AppState
-import com.example.gbmaterialdesign.ui.MyBottomSheetDialog
 import com.example.gbmaterialdesign.ui.viewModel.PictureOfTheDayViewModel.MainViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -29,7 +27,6 @@ class PictureOfTheDayFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +83,8 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         }
+
+
     }
 
     private fun renderData(it: AppState) {
@@ -94,6 +93,7 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.Success -> {
 
                 binding.frameLoading.visibility = View.GONE
+                TransitionManager.beginDelayedTransition(binding.mainContainer)
                 binding.pictureOfDay.load(
                     it.pictureOfTheDay.url
                 ) {
@@ -102,12 +102,15 @@ class PictureOfTheDayFragment : Fragment() {
                 }
                 binding.pictureOfDay.setOnClickListener { view ->
                     val bundle = Bundle()
-                    bundle.putString(MyBottomSheetDialog.BUNDLE_EXTRA,
+                    bundle.putString(PictureOfTheDayFullSreen.BUNDLE_EXTRA,
                         it.pictureOfTheDay.explanation)
+                    bundle.putString(PictureOfTheDayFullSreen.BUNDLE_URL, it.pictureOfTheDay.url)
 
-                    val myBottomDialog = MyBottomSheetDialog.newInstance(bundle)
-
-                    myBottomDialog.show(childFragmentManager, MyBottomSheetDialog.TAG)
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, PictureOfTheDayFullSreen.newInstance(bundle))
+                        .addToBackStack("")
+                        .commit()
                 }
 
             }

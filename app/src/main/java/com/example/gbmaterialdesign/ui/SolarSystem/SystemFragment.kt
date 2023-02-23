@@ -1,6 +1,7 @@
 package com.example.gbmaterialdesign.ui.SolarSystem
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.bumptech.glide.Glide
 import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.data.Retrofits.MarsRetrofit.MarsRepositoryImpl
 import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RetrofitClient
@@ -57,15 +59,12 @@ class SystemFragment : Fragment() {
         return binding.root
     }
 
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       viewModel.getSolarSystemLiveData().observe(viewLifecycleOwner, Observer {
-           renderData(it)
-       })
+        viewModel.getSolarSystemLiveData().observe(viewLifecycleOwner, Observer {
+            renderData(it)
+        })
 
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DATE, -2)
@@ -76,16 +75,27 @@ class SystemFragment : Fragment() {
 
         viewModel.getEarthData(dayBeforeYesterday, yesterday)
 
-
     }
 
     private fun renderData(it: AppStateSolarSystem) {
 
         when (it) {
             is AppStateSolarSystem.Success -> {
-               binding.frameLoadingSS.visibility = View.GONE
+                binding.frameLoadingSS.visibility = View.GONE
 
                 binding.systemText.text = it.solarSystemWeather.get(0).messageBody
+
+                var url = ""
+                val matcher = Patterns.WEB_URL.matcher(it.solarSystemWeather.get(0).messageBody)
+                if (matcher.find()) {
+                    println("URL " + matcher.group())
+                    url = matcher.group()
+                }
+
+                Glide.with(requireActivity())
+                    .load(url)
+                    .into(binding.solSystemWeather)
+
 
             }
             is AppStateSolarSystem.Error -> {
