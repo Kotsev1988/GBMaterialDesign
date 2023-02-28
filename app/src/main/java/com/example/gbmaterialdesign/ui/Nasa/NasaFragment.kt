@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.RetrofitEarthClient
 import com.example.gbmaterialdesign.data.Retrofits.MarsRetrofit.MarsRepositoryImpl
@@ -19,6 +20,7 @@ import com.example.gbmaterialdesign.model.Data.Data.Companion.SOLAR
 import com.example.gbmaterialdesign.model.repository.EarthRepository
 import com.example.gbmaterialdesign.model.repository.MarsRepository
 import com.example.gbmaterialdesign.model.repository.SolarSystemRepository
+import com.example.gbmaterialdesign.ui.TouchHelper.ItemTouchHelperCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -114,8 +116,10 @@ class NasaFragment : Fragment() {
             withContext(Dispatchers.Main){
                 adapter = NasaRecyclerAdapter(dataList, callbackAdd, callbackRemove)
                 binding.recyclerView.adapter = adapter
+                ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
             }
         }
+
 
     }
 

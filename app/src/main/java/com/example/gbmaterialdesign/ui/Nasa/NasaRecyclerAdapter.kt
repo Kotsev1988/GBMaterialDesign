@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gbmaterialdesign.R
@@ -13,8 +14,12 @@ import com.example.gbmaterialdesign.model.Data.Data
 import com.example.gbmaterialdesign.model.Data.Data.Companion.EARTH
 import com.example.gbmaterialdesign.model.Data.Data.Companion.MARS
 import com.example.gbmaterialdesign.model.Data.Data.Companion.SOLAR
+import com.example.gbmaterialdesign.ui.TouchHelper.ItemTouchViewHolder
+import com.example.gbmaterialdesign.ui.TouchHelper.ItemTouchHelperAdapater
 
-class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>, val addItem: AddItems, val removeItem: RemoveItem): RecyclerView.Adapter<NasaRecyclerAdapter.BaseViewHolder>() {
+class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>,
+                          val addItem: AddItems, val removeItem: RemoveItem):
+    RecyclerView.Adapter<NasaRecyclerAdapter.BaseViewHolder>(), ItemTouchHelperAdapater {
 
     fun addItemList(dataNew: MutableList<Pair<Data, Boolean>>, position: Int){
         dataList = dataNew
@@ -61,7 +66,7 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>, val ad
         holder.bind(dataList[position].first)
     }
 
-    inner class EarthViewHolder(val binding : EarthItemBinding): BaseViewHolder(binding.root){
+    inner class EarthViewHolder(val binding : EarthItemBinding): BaseViewHolder(binding.root) {
 
         private val name: TextView = itemView.findViewById(R.id.earth_text)
         private val img: ImageView = itemView.findViewById(R.id.earth_picture)
@@ -112,6 +117,16 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>, val ad
                 }
             }
         }
+
+        override fun onItemSelected() {
+            binding.root.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.myColor))
+        }
+
+        override fun onItemClear() {
+            binding.root.setBackgroundColor(0)
+        }
+
+
     }
 
     inner class MarsViewHolder(itemView: View): BaseViewHolder(itemView){
@@ -127,6 +142,16 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>, val ad
                 .thumbnail()
                 .into(img)
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.myColor))
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+
+
     }
 
     inner class SolarViewHolder(itemView: View): BaseViewHolder(itemView){
@@ -145,6 +170,16 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>, val ad
             }
 
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.myColor))
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+
+
     }
 
     inner class HeaderViewHolder(itemView: View): BaseViewHolder(itemView){
@@ -154,9 +189,30 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>, val ad
             name.text = "Заголовок"
 
         }
+
+        override fun onItemSelected() {
+            TODO("Not yet implemented")
+        }
+
+        override fun onItemClear() {
+            TODO("Not yet implemented")
+        }
     }
 
-    abstract inner class BaseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    abstract inner class BaseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), ItemTouchViewHolder{
       abstract fun bind(data: Data)
     }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        dataList.removeAt(fromPosition).apply {
+            dataList.add(toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        removeItem.remove(position)
+    }
+
+
 }
