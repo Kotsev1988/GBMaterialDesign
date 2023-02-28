@@ -3,15 +3,10 @@ package com.example.gbmaterialdesign.ui.viewModel.EarthViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import coil.load
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.RetrofitEarthClient
-import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RepositoryImpl
-import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RetrofitClient
 import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
 import com.example.gbmaterialdesign.model.repository.EarthRepository
-import com.example.gbmaterialdesign.model.repository.Repository
-import com.example.gbmaterialdesign.ui.AppSatates.AppState
 import com.example.gbmaterialdesign.ui.AppSatates.AppStateEarth
 import retrofit2.Call
 import retrofit2.Callback

@@ -10,4 +10,7 @@ class RepositoryImpl(private val retrofitClient: RetrofitClient): Repository {
 
         retrofitClient.getPictureOfTheDay(date, callback)
     }
+
+
+
 }

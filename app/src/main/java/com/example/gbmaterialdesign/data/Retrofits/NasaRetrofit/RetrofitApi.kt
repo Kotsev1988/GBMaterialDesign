@@ -6,6 +6,7 @@ import com.example.gbmaterialdesign.model.MarsPictures.MarsPicture
 import com.example.gbmaterialdesign.model.PictureOfTheDay
 import com.example.gbmaterialdesign.model.SolarSystemWeather.SolarSystemWeather
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,12 +18,17 @@ interface RetrofitApi {
     ): Call<PictureOfTheDay>
 
 
-
     @GET("mars-photos/api/v1/rovers/curiosity/photos?")
     fun getMarsPicture(
         @Query("api_key") apiKey : String = BuildConfig.NASA_API_KEY,
         @Query("sol") sol : String = "1000"
     ): Call<MarsPicture>
+
+    @GET("mars-photos/api/v1/rovers/curiosity/photos?")
+    suspend fun getMarsPictureRecycler(
+        @Query("api_key") apiKey : String = BuildConfig.NASA_API_KEY,
+        @Query("sol") sol : String = "1000"
+    ): Response<MarsPicture>
 
     @GET("DONKI/notifications?")
     fun SolarSystemWeather(
@@ -31,4 +37,12 @@ interface RetrofitApi {
         @Query("startDate") startDate: String,
         @Query("endDate") endDate: String
     ): Call<SolarSystemWeather>
+
+    @GET("DONKI/notifications?")
+    suspend fun SolarSystemWeatherRecycler(
+        @Query("api_key") apiKey : String = BuildConfig.NASA_API_KEY,
+        @Query("type") type : String = "all",
+        @Query("startDate") startDate: String,
+        @Query("endDate") endDate: String
+    ): Response<SolarSystemWeather>
 }

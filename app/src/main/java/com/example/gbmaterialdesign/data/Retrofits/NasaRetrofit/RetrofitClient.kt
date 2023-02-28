@@ -8,7 +8,9 @@ import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
@@ -28,23 +30,25 @@ class RetrofitClient {
     }
     private val serviceApi: RetrofitApi = apiRetrofit(baseURL).create(RetrofitApi::class.java)
 
-
-
     fun getPictureOfTheDay(date: String, callback: Callback<PictureOfTheDay>){
         return serviceApi.getPictureOfTheDay(date = date).enqueue(callback)
     }
 
-
-
     fun getMarsPicture(callback: Callback<MarsPicture>){
         return serviceApi.getMarsPicture().enqueue(callback)
+    }
+
+    suspend fun getMarsPictureRecycler(): Response<MarsPicture>{
+        return serviceApi.getMarsPictureRecycler()
     }
 
     fun getSolarSystemWeather(startDate: String, endDate: String, callback: Callback<SolarSystemWeather>){
         return serviceApi.SolarSystemWeather(startDate = startDate, endDate = endDate).enqueue(callback)
     }
 
-
+    suspend fun getSolarSystemWeatherRecycler(startDate: String, endDate: String): Response<SolarSystemWeather>{
+        return serviceApi.SolarSystemWeatherRecycler(startDate = startDate, endDate = endDate)
+    }
 
     private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {
         val httpClient = OkHttpClient.Builder()

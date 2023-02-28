@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.gbmaterialdesign.databinding.BaseFragmentBinding
 import com.example.gbmaterialdesign.ui.Earth.EarthFragment
 import com.example.gbmaterialdesign.ui.Mars.MarsFragment
+import com.example.gbmaterialdesign.ui.Nasa.NasaFragment
 import com.example.gbmaterialdesign.ui.PictureOfTheDay.PictureOfTheDayFragment
 import com.example.gbmaterialdesign.ui.SolarSystem.SystemFragment
 
@@ -51,6 +52,11 @@ class BaseFragment(): Fragment() {
 
                 R.id.bottom_system ->{
                     navigateTo(SystemFragment())
+                    true
+                }
+
+                R.id.nasa_list ->{
+                    navigateTo(NasaFragment())
                     true
                 }
                 else -> true
