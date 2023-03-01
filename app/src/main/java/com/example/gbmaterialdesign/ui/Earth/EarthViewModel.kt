@@ -1,4 +1,4 @@
-package com.example.gbmaterialdesign.ui.viewModel.EarthViewModel
+package com.example.gbmaterialdesign.ui.Earth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

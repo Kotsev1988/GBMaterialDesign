@@ -12,7 +12,6 @@ import coil.load
 import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.databinding.FragmentPictureBinding
 import com.example.gbmaterialdesign.ui.AppSatates.AppState
-import com.example.gbmaterialdesign.ui.viewModel.PictureOfTheDayViewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat

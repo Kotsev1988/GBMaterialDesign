@@ -14,25 +14,23 @@ class DiffUtilCallback(private val oldDataList: MutableList<Pair<Data, Boolean>>
     override fun getNewListSize(): Int = newDataList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        println("COMBINEDareItemsTheSame ")
+
         return oldDataList[oldItemPosition] == newDataList[newItemPosition]
 
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-//        when(oldDataList[oldItemPosition].first.type){
-//            EARTH ->{
-//                return oldDataList[oldItemPosition].first.earth?.caption == newDataList[newItemPosition].first.earth?.caption
-//            }
-//            MARS ->{
-//                return oldDataList[oldItemPosition].first.mars?.earth_date == newDataList[newItemPosition].first.mars?.earth_date
-//            }
-//            SOLAR ->{
-//                return oldDataList[oldItemPosition].first.solar?.messageBody == newDataList[newItemPosition].first.solar?.messageBody
-//            }
-//        }
-//        return true
-
+        when(oldDataList[oldItemPosition].first.type){
+            EARTH ->{
+                return oldDataList[oldItemPosition].first.earth?.id == newDataList[newItemPosition].first.earth?.id
+            }
+            MARS ->{
+                return oldDataList[oldItemPosition].first.mars?.earth_date == newDataList[newItemPosition].first.mars?.earth_date
+            }
+            SOLAR ->{
+                return oldDataList[oldItemPosition].first.solar?.messageBody == newDataList[newItemPosition].first.solar?.messageBody
+            }
+        }
         return oldDataList[oldItemPosition] == newDataList[newItemPosition]
     }
 

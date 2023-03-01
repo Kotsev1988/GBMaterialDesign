@@ -10,7 +10,7 @@ data class EarthPictureItem(
     val date: String,
     val dscovr_j2000_position: DscovrJ2000PositionX,
     @SerializedName("identifier")
-    val id: String,
+    var id: String,
     val image: String,
     val lunar_j2000_position: LunarJ2000PositionX,
     val sun_j2000_position: SunJ2000PositionX,

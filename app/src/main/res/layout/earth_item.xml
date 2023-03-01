@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    >
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:id="@+id/editItemsEarth"
@@ -12,26 +11,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/addItemEarth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_plus_fab"
-        android:background="#BDACAC"
-        android:layout_margin="5dp"
-        />
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/removeItemEarth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_archive"
-        android:background="#EFD0D0"
-        android:layout_margin="5dp"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/addItemEarth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#BDACAC"
+            app:srcCompat="@drawable/ic_plus_fab" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/removeItemEarth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#EFD0D0"
+            app:srcCompat="@drawable/ic_archive" />
 
     </LinearLayout>
 
@@ -41,54 +39,50 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
 
-        app:layout_constraintEnd_toStartOf="@id/editItemsEarth"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintEnd_toStartOf="@id/editItemsEarth"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/moveUPItemEarth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_arrow_drop_up"
-            android:background="#BDACAC"
             android:layout_margin="5dp"
-            />
+            android:background="#BDACAC"
+            app:srcCompat="@drawable/ic_arrow_drop_up" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/moveDownItemEarth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_arrow_drop_down"
-            android:background="#EFD0D0"
             android:layout_margin="5dp"
-            />
+            android:background="#EFD0D0"
+            app:srcCompat="@drawable/ic_arrow_drop_down" />
 
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/earth_picture"
+        android:id="@+id/earthItemPicture"
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/earth_text"
+        android:id="@+id/earthText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:layout_constraintEnd_toStartOf="@id/moveItem"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/earth_picture"
-        />
-    
+        app:layout_constraintStart_toEndOf="@+id/earthItemPicture"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:background="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

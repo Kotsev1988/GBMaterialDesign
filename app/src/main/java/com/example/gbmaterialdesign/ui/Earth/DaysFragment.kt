@@ -1,6 +1,5 @@
 package com.example.gbmaterialdesign.ui.Earth
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -17,24 +16,8 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import coil.load
-import com.bumptech.glide.Glide
-import com.example.gbmaterialdesign.R
-import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
-import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.RetrofitEarthClient
 import com.example.gbmaterialdesign.databinding.FragmentDaysBinding
-import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
-import com.example.gbmaterialdesign.model.repository.EarthRepository
-import com.example.gbmaterialdesign.ui.AppSatates.AppState
 import com.example.gbmaterialdesign.ui.AppSatates.AppStateEarth
-import com.example.gbmaterialdesign.ui.MyBottomSheetDialog
-import com.example.gbmaterialdesign.ui.viewModel.EarthViewModel.EarthViewModel
-import com.example.gbmaterialdesign.ui.viewModel.PictureOfTheDayViewModel.MainViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class DaysFragment : Fragment() {

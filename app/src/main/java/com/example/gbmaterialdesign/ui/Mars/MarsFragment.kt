@@ -10,23 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.transition.TransitionManager
 import coil.load
-import com.bumptech.glide.Glide
-import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
-import com.example.gbmaterialdesign.data.Retrofits.MarsRetrofit.MarsRepositoryImpl
-import com.example.gbmaterialdesign.data.Retrofits.NasaRetrofit.RetrofitClient
 import com.example.gbmaterialdesign.databinding.FragmentMarsBinding
-import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
-import com.example.gbmaterialdesign.model.MarsPictures.MarsPicture
-import com.example.gbmaterialdesign.model.repository.EarthRepository
-import com.example.gbmaterialdesign.model.repository.MarsRepository
-import com.example.gbmaterialdesign.ui.AppSatates.AppStateEarth
 import com.example.gbmaterialdesign.ui.AppSatates.AppStateMars
-import com.example.gbmaterialdesign.ui.viewModel.EarthViewModel.EarthViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MarsFragment : Fragment() {
 
@@ -154,6 +140,7 @@ class MarsFragment : Fragment() {
                 binding.roverButton.setOnClickListener {
 
                   binding.marsDescription.text =  mars.photos.get(0).rover.name +" "
+
                           mars.photos.get(0).rover.status+ " "+mars.photos.get(0).rover.launch_date
                 }
 

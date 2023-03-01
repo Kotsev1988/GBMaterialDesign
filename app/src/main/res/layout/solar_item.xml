@@ -46,7 +46,7 @@
     
 
     <TextView
-        android:id="@+id/solar_text"
+        android:id="@+id/solarItemText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -57,7 +57,7 @@
         />
 
     <TextView
-        android:id="@+id/solar_full_text"
+        android:id="@+id/solarFullText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

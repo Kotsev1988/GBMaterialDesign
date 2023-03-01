@@ -1,4 +1,4 @@
-package com.example.gbmaterialdesign.ui.viewModel.PictureOfTheDayViewModel
+package com.example.gbmaterialdesign.ui.PictureOfTheDay
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
