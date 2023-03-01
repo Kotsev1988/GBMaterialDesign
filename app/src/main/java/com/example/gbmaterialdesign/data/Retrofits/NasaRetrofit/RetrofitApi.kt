@@ -27,7 +27,7 @@ interface RetrofitApi {
     @GET("mars-photos/api/v1/rovers/curiosity/photos?")
     suspend fun getMarsPictureRecycler(
         @Query("api_key") apiKey : String = BuildConfig.NASA_API_KEY,
-        @Query("sol") sol : String = "1000"
+        @Query("sol") sol : String = "10"
     ): Response<MarsPicture>
 
     @GET("DONKI/notifications?")

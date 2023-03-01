@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gbmaterialdesign.R
@@ -16,6 +17,9 @@ import com.example.gbmaterialdesign.model.Data.Data.Companion.MARS
 import com.example.gbmaterialdesign.model.Data.Data.Companion.SOLAR
 import com.example.gbmaterialdesign.ui.TouchHelper.ItemTouchViewHolder
 import com.example.gbmaterialdesign.ui.TouchHelper.ItemTouchHelperAdapater
+import com.example.gbmaterialdesign.ui.diffutil.Change
+import com.example.gbmaterialdesign.ui.diffutil.DiffUtilCallback
+import com.example.gbmaterialdesign.ui.diffutil.createCombinedPayload
 
 class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>,
                           val addItem: AddItems, val removeItem: RemoveItem):
@@ -29,6 +33,15 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>,
     fun removeItemList(dataNew: MutableList<Pair<Data, Boolean>>, position: Int){
         dataList = dataNew
         notifyItemRemoved(position)
+    }
+
+    fun setDataLIstDiffUtil(newList: MutableList<Pair<Data, Boolean>>){
+
+      val diff =  DiffUtil.calculateDiff(DiffUtilCallback(dataList, newList))
+
+      dataList = newList
+        diff.dispatchUpdatesTo(this)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -56,7 +69,10 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>,
         }
     }
 
-    override fun getItemCount(): Int = dataList.size
+    override fun getItemCount(): Int {
+        println("LIST SIZE "+dataList.size)
+        return dataList.size
+    }
 
     override fun getItemViewType(position: Int): Int {
         return dataList[position].first.type
@@ -66,12 +82,49 @@ class NasaRecyclerAdapter(var dataList: MutableList<Pair<Data, Boolean>>,
         holder.bind(dataList[position].first)
     }
 
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+
+        if (payloads.isEmpty()){
+            super.onBindViewHolder(holder, position, payloads)
+        }else{
+
+            val combinedPayload = createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
+
+
+            if (combinedPayload.newData.first.earth?.id == combinedPayload.oldData.first.earth?.id){
+                        holder.itemView.findViewById<TextView>(R.id.earth_text).text = combinedPayload.newData.first.earth?.id
+                    }
+
+            when(combinedPayload.newData.first.type){
+                EARTH ->{
+                    if (combinedPayload.newData.first.earth?.id == combinedPayload.oldData.first.earth?.id){
+                        holder.itemView.findViewById<TextView>(R.id.earth_text).text = combinedPayload.newData.first.earth?.id
+                    }
+                }
+                MARS ->{
+                    if (combinedPayload.newData.first.mars?.id == combinedPayload.oldData.first.mars?.id){
+                        holder.itemView.findViewById<TextView>(R.id.mars_text).text = combinedPayload.newData.first.mars?.earth_date
+                    }
+                }
+                SOLAR ->{
+                    if (combinedPayload.newData.first.solar?.id == combinedPayload.oldData.first.solar?.id){
+                        holder.itemView.findViewById<TextView>(R.id.solar_text).text = combinedPayload.newData.first.solar?.messageBody
+                    }
+                }
+            }
+        }
+    }
+
     inner class EarthViewHolder(val binding : EarthItemBinding): BaseViewHolder(binding.root) {
 
         private val name: TextView = itemView.findViewById(R.id.earth_text)
         private val img: ImageView = itemView.findViewById(R.id.earth_picture)
         override fun bind(data: Data){
-          name.text = data.earth?.caption+" "+data.earth?.identifier
+          name.text = data.earth?.caption+" "+data.earth?.id
 
             val earth_date: String
             val picture = data.earth?.image

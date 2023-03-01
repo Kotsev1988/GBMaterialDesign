@@ -1,5 +1,7 @@
 package com.example.gbmaterialdesign.model.EarthPictures
 
+import com.google.gson.annotations.SerializedName
+
 data class EarthPictureItem(
     val attitude_quaternions: AttitudeQuaternions,
     val caption: String,
@@ -7,7 +9,8 @@ data class EarthPictureItem(
     val coords: Coords,
     val date: String,
     val dscovr_j2000_position: DscovrJ2000PositionX,
-    val identifier: String,
+    @SerializedName("identifier")
+    val id: String,
     val image: String,
     val lunar_j2000_position: LunarJ2000PositionX,
     val sun_j2000_position: SunJ2000PositionX,

@@ -17,6 +17,9 @@ import com.example.gbmaterialdesign.model.Data.Data.Companion.EARTH
 import com.example.gbmaterialdesign.model.Data.Data.Companion.HEADER
 import com.example.gbmaterialdesign.model.Data.Data.Companion.MARS
 import com.example.gbmaterialdesign.model.Data.Data.Companion.SOLAR
+import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
+import com.example.gbmaterialdesign.model.MarsPictures.MarsPicture
+import com.example.gbmaterialdesign.model.SolarSystemWeather.SolarSystemWeather
 import com.example.gbmaterialdesign.model.repository.EarthRepository
 import com.example.gbmaterialdesign.model.repository.MarsRepository
 import com.example.gbmaterialdesign.model.repository.SolarSystemRepository
@@ -25,6 +28,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +44,7 @@ class NasaFragment : Fragment() {
     private var _binding: FragmentNasaBinding? = null
     private val binding get() = _binding!!
 
-    private val dataList: MutableList<Pair<Data, Boolean>> = mutableListOf()
+    private var dataList: MutableList<Pair<Data, Boolean>> = mutableListOf()
 
     val callbackAdd = object : AddItems {
         override fun add(position: Int) {
@@ -85,6 +89,12 @@ class NasaFragment : Fragment() {
     }
 
     lateinit var adapter: NasaRecyclerAdapter
+
+    lateinit var response: Response<EarthPicture>
+
+    lateinit var solarResponse: Response<SolarSystemWeather>
+    lateinit var marsResponse: Response<MarsPicture>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -94,30 +104,59 @@ class NasaFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val response = repositoryEarth.getEarthPictureRecycler(day)
+             response = repositoryEarth.getEarthPictureRecycler(day)
             dataList.add(Pair(Data(HEADER, null, null, null),false))
-            response.body()?.forEach {
-                dataList.add(Pair(Data(EARTH, it,null,  null),false))
+
+
+            for (i in 0..5){
+                dataList.add(Pair(Data(EARTH, response.body()?.get(i),null,  null),false))
             }
 
-            val solarResponse = repository.getSolarsystemWeatherRecycler("2014-05-01", "2014-05-08")
+            solarResponse = repository.getSolarsystemWeatherRecycler("2014-05-01", "2014-05-08")
             dataList.add(Pair(Data(HEADER, null, null, null), false))
-            solarResponse.body()?.forEach {
-                dataList.add(Pair(Data(SOLAR, null,null,  it), false))
+
+            for (i in 0..5){
+                dataList.add(Pair(Data(SOLAR, null,null,  solarResponse.body()?.get(i)), false))
             }
 
 
-            val marsResponse = repositoryMars.getMarsPictureRecycler()
+             marsResponse = repositoryMars.getMarsPictureRecycler()
             dataList.add(Pair(Data(HEADER, null, null, null),false))
-            marsResponse.body()?.photos?.forEach {
-                dataList.add(Pair(Data(MARS, null, it,  null),false))
+
+            for (i in 0..5){
+                dataList.add(Pair(Data(MARS, null, marsResponse.body()?.photos?.get(i),  null),false))
             }
+
 
             withContext(Dispatchers.Main){
                 adapter = NasaRecyclerAdapter(dataList, callbackAdd, callbackRemove)
                 binding.recyclerView.adapter = adapter
                 ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
             }
+        }
+
+        binding.refreshList.setOnClickListener {
+
+            val newDataList: MutableList<Pair<Data, Boolean>> = mutableListOf()
+
+            newDataList.add(Pair(Data(HEADER, null, null, null),false))
+            for (i in 6..12){
+                newDataList.add(Pair(Data(EARTH, response.body()?.get(i),null,  null),false))
+            }
+
+            newDataList.add(Pair(Data(HEADER, null, null, null), false))
+
+            for (i in 6..11){
+                newDataList.add(Pair(Data(SOLAR, null,null,  solarResponse.body()?.get(i)), false))
+            }
+            newDataList.add(Pair(Data(HEADER, null, null, null), false))
+            for (i in 6..11){
+                newDataList.add(Pair(Data(MARS, null, marsResponse.body()?.photos?.get(i),  null),false))
+            }
+
+            adapter.setDataLIstDiffUtil(newDataList)
+            dataList = newDataList
+
         }
 
 
