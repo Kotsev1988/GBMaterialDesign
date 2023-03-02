@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@color/black"
+            android:background="#AC6A6A"
             app:srcCompat="@drawable/ic_plus_fab" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -28,8 +28,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@color/black"
+            android:background="#E69E9E"
             app:srcCompat="@drawable/ic_archive" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/moveItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/editItemsMars"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/moveUPItemMars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#BDACAC"
+            app:srcCompat="@drawable/ic_arrow_drop_up" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/moveDownItemMars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#EFD0D0"
+            app:srcCompat="@drawable/ic_arrow_drop_down" />
 
     </LinearLayout>
 

@@ -57,6 +57,7 @@ class NasaViewModel (
 
             response = repositoryEarth.getEarthPictureRecycler(day)
             dataList.add(Pair(Data(Data.HEADER, null, null, null),false))
+            newDataList.add(Pair(Data(Data.HEADER, null, null, null),false))
 
 
             if (response.isSuccessful) {
@@ -69,6 +70,7 @@ class NasaViewModel (
 
             solarResponse = repository.getSolarsystemWeatherRecycler("2014-05-01", "2014-05-08")
             dataList.add(Pair(Data(Data.HEADER, null, null, null), false))
+            newDataList.add(Pair(Data(Data.HEADER, null, null, null),false))
 
             for (i in 0..5){
                 dataList.add(Pair(Data(Data.SOLAR, null,null,  solarResponse.body()?.get(i)), false))
@@ -78,6 +80,7 @@ class NasaViewModel (
 
             marsResponse = repositoryMars.getMarsPictureRecycler()
             dataList.add(Pair(Data(Data.HEADER, null, null, null),false))
+            newDataList.add(Pair(Data(Data.HEADER, null, null, null),false))
 
             for (i in 0..5){
                 dataList.add(Pair(Data(Data.MARS, null, marsResponse.body()?.photos?.get(i),  null),false))
@@ -99,7 +102,10 @@ class NasaViewModel (
         //dataList = newDataList - если сравниваемые списки не равны пока не сделаю это равентсво
         // корректно список не отображается. То есть список обновляется, но когда удаляешь элемент
         // или добавляешь - появляется старый список
-        // И еще почему то если я в этой функции создам val newDataList = dataList и потом меняю значения у newDataList , diffutil не срабатывает
+        // И еще почему то если я в этой функции создам val newDataList = dataList и потом меняю
+        // значения у newDataList , diffutil не срабатывает
+
+       // dataList = newDataList
         liveDataNasa.postValue(AppStateNasa.UseDiffUtil(newDataList))
     }
 
