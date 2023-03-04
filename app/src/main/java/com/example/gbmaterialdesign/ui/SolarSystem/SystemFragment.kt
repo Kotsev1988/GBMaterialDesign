@@ -1,14 +1,30 @@
 package com.example.gbmaterialdesign.ui.SolarSystem
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.red
+import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.BulletSpan
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.URLSpan
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.gbmaterialdesign.R
 import com.example.gbmaterialdesign.databinding.FragmentSystemBinding
 import com.example.gbmaterialdesign.ui.AppSatates.AppStateSolarSystem
 import java.text.DateFormat
@@ -26,6 +42,8 @@ class SystemFragment : Fragment() {
     }
 
     val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
+
+    lateinit var spannableRainBow: SpannableString
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,24 +77,53 @@ class SystemFragment : Fragment() {
 
     }
 
+    @SuppressLint("NewApi")
     private fun renderData(it: AppStateSolarSystem) {
 
         when (it) {
             is AppStateSolarSystem.Success -> {
                 binding.frameLoadingSS.visibility = View.GONE
 
-                binding.systemText.text = it.solarSystemWeather.get(0).messageBody
+                val string = it.solarSystemWeather.get(it.solarSystemWeather.size-1).messageBody
+                val spannable = SpannableString(string)
+
+                spannable.setSpan(BulletSpan(100, ContextCompat.getColor(requireContext(), R.color.myColor), 10), 0, string.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE )
+
+
+                spannable.setSpan(ForegroundColorSpan(Color.MAGENTA), 10, string.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+                for(i in string.indices){
+                    if (string[i].toString()=="t"){
+                        spannable.setSpan(ForegroundColorSpan(Color.RED), i, i+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    }
+                }
 
                 var url = ""
-                val matcher = Patterns.WEB_URL.matcher(it.solarSystemWeather.get(0).messageBody)
-                if (matcher.find()) {
-                    println("URL " + matcher.group())
+                var startURL : Int =-1
+                var endURL: Int = -1
+                val matcher = Patterns.WEB_URL.matcher(string)
+                while (matcher.find()) {
+
                     url = matcher.group()
+
+                    startURL = matcher.start()
+                    endURL = matcher.end()
+                    spannable.setSpan(URLSpan(url) , startURL, endURL, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
+
+
+                binding.systemText.movementMethod = LinkMovementMethod.getInstance()
+                binding.systemText.text = spannable
+
+
 
                 Glide.with(requireActivity())
                     .load(url)
                     .into(binding.solSystemWeather)
+
+                //spannableRainBow =SpannableString(string) //- окрашивание символов в цвета радуги
+                //rainbow(1)
 
 
             }
@@ -97,5 +144,59 @@ class SystemFragment : Fragment() {
 
     companion object {
         fun newInstance() = SystemFragment()
+    }
+
+    fun rainbow(i: Int = 1){
+        var currentCount = i
+
+        val x = object : CountDownTimer(2000, 200){
+            override fun onTick(p0: Long) {
+                colorText(currentCount)
+                currentCount = if (++currentCount>5) 1 else currentCount
+            }
+
+            override fun onFinish() {
+                rainbow(currentCount)
+            }
+        }
+        x.start()
+    }
+
+    private fun colorText(colorFirstNumber: Int){
+        binding.systemText.setText(spannableRainBow, TextView.BufferType.SPANNABLE)
+        spannableRainBow =  binding.systemText.text as SpannableString
+        val map = mapOf(
+            0 to ContextCompat.getColor(requireContext(), R.color.red),
+            1 to ContextCompat.getColor(requireContext(), R.color.orange),
+            2 to ContextCompat.getColor(requireContext(), R.color.yellow),
+            3 to ContextCompat.getColor(requireContext(), R.color.green),
+            4 to ContextCompat.getColor(requireContext(), R.color.blue),
+            5 to ContextCompat.getColor(requireContext(), R.color.purple_700),
+            6 to ContextCompat.getColor(requireContext(), R.color.purple_500)
+        )
+
+        val spans = spannableRainBow.getSpans(
+            0, spannableRainBow.length,
+            ForegroundColorSpan::class.java
+        )
+
+        for (span in spans){
+            spannableRainBow.removeSpan(span)
+        }
+
+        var colorNumber = colorFirstNumber
+
+        for (i in 0 until binding.systemText.text.length){
+            if (colorNumber == 5) {
+
+                colorNumber =0
+            } else {
+                colorNumber +=1
+            }
+            spannableRainBow.setSpan(
+                ForegroundColorSpan(map.getValue(colorNumber)),
+                i, i+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
     }
 }

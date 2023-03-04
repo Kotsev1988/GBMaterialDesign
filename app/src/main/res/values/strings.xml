@@ -20,7 +20,7 @@
     <string name="home">Home</string>
     <string name="image">image</string>
     <string name="rover">rover</string>
-    <string name="sol">sol</string>
+    <string name="camera">camera</string>
     <string name="hide_3_button_using_groups">hide 3 button using groups</string>
     <string name="system_fragment">System Fragment</string>
     <string name="nasa_list">Nasa</string>

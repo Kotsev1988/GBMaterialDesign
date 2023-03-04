@@ -52,7 +52,7 @@ class NasaViewModel (
 
 
             val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DATE, -3)
+            calendar.add(Calendar.DATE, -10)
             val day = dateFormat.format(calendar.time)
 
             response = repositoryEarth.getEarthPictureRecycler(day)
@@ -97,6 +97,13 @@ class NasaViewModel (
 
         newDataList.get(2).first.earth?.id = "1235"
         newDataList.get(4).first.earth?.id = "1238888"
+
+        if (response.isSuccessful) {
+
+                newDataList.add(Pair(Data(Data.EARTH, response.body()?.get(6), null, null), false))
+
+
+        }
 
 
         //dataList = newDataList - если сравниваемые списки не равны пока не сделаю это равентсво

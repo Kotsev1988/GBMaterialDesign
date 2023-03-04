@@ -74,7 +74,6 @@
             android:id="@+id/systemText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autoLink="web"
             android:layout_margin="20dp" />
         </LinearLayout>
 

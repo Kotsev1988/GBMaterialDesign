@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@id/barrierFirst"
-        app:constraint_referenced_ids="imageButton, roverButton, solButton"
+        app:constraint_referenced_ids="imageButton, roverButton, cameraButton"
         />
 
 
@@ -59,10 +59,10 @@
         />
 
     <Button
-        android:id="@+id/solButton"
+        android:id="@+id/cameraButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sol"
+        android:text="@string/camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/roverButton"
         />
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hide_3_button_using_groups"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/solButton"
+        app:layout_constraintTop_toBottomOf="@id/cameraButton"
         app:layout_constraintBottom_toTopOf="@id/barrierSecond"
         app:layout_constraintWidth_percent="0.3"
         />
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
-        app:constraint_referenced_ids="imageButton, roverButton, solButton, hideButtons"
+        app:constraint_referenced_ids="imageButton, roverButton, cameraButton, hideButtons"
         />
 
     <androidx.constraintlayout.widget.Barrier
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="imageButton, roverButton, solButton, hideButtons"
+        app:constraint_referenced_ids="imageButton, roverButton, cameraButton, hideButtons"
 
         />
 
@@ -106,6 +106,8 @@
         app:layout_constraintTop_toTopOf="@id/barrierSecond"
         app:layout_constraintStart_toEndOf="@id/barrierFirst"
         />
+
+
 
     <FrameLayout
         android:layout_width="match_parent"

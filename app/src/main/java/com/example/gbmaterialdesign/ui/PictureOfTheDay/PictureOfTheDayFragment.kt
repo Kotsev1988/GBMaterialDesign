@@ -1,6 +1,7 @@
 package com.example.gbmaterialdesign.ui.PictureOfTheDay
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -111,6 +112,14 @@ class PictureOfTheDayFragment : Fragment() {
                         .addToBackStack("")
                         .commit()
                 }
+
+                requireActivity()?.let {
+                    binding.description.typeface = Typeface.createFromAsset(it.assets, "alladin/KryptapersonaluseExtrabold-L3oVD.otf")
+                }
+
+                binding.description.text = it.pictureOfTheDay.explanation
+
+
 
             }
             is AppState.Error -> {

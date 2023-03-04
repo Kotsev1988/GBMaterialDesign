@@ -1,5 +1,6 @@
 package com.example.gbmaterialdesign.ui
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,9 +25,15 @@ class MyBottomSheetDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+            requireActivity()?.let {
+                binding.bottomSheetDescription.typeface = Typeface.createFromAsset(it.assets, "alladin/KryptapersonaluseExtrabold-L3oVD.otf")
+            }
+
 
         arguments?.getString(BUNDLE_EXTRA).let {
             if (it != null) {
+
+
                 binding.bottomSheetDescription.text = it
             }
         }

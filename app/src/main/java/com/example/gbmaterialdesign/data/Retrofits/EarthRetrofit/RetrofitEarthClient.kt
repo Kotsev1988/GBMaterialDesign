@@ -1,6 +1,7 @@
 package com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit
 
 
+import com.example.gbmaterialdesign.BuildConfig
 import com.example.gbmaterialdesign.model.EarthPictures.EarthPicture
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -32,7 +33,7 @@ class RetrofitEarthClient {
     }
 
     suspend fun getEarthPictureRecycler(date: String): Response<EarthPicture>{
-        return serviceApi.getEarthPictureRecycler(date)
+        return serviceApi.getEarthPictureRecycler(date, BuildConfig.NASA_API_KEY)
     }
 
     private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {

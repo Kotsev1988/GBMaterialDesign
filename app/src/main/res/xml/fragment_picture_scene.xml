@@ -45,7 +45,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/wiki_button"
+            android:id="@+id/wikiButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -89,7 +89,7 @@
         app:duration="2000">drag left
         <OnSwipe
             app:dragDirection="dragRight"
-            app:touchAnchorId="@+id/wiki_button"
+            app:touchAnchorId="@+id/wikiButton"
             app:touchAnchorSide="right"
             />
     </Transition>

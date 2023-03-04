@@ -25,7 +25,7 @@ class ViewPagerAdapter(fm: Fragment): FragmentStateAdapter(fm) {
                 val bundle = Bundle()
 
                 val calendar = Calendar.getInstance()
-                calendar.add(Calendar.DATE, -2)
+                calendar.add(Calendar.DATE, -10)
                 val dayBeforeYesterday = dateFormat.format(calendar.time)
                 bundle.putString(BUNDLE_DAY, dayBeforeYesterday)
                 DaysFragment.newInstance(bundle)
@@ -34,7 +34,7 @@ class ViewPagerAdapter(fm: Fragment): FragmentStateAdapter(fm) {
             1 -> {
                 val bundle = Bundle()
                 val calendar = Calendar.getInstance()
-                calendar.add(Calendar.DATE, -3)
+                calendar.add(Calendar.DATE, -15)
                 val yesterday = dateFormat.format(calendar.time)
                 bundle.putString(BUNDLE_DAY, yesterday)
                 DaysFragment.newInstance(bundle)
@@ -43,7 +43,7 @@ class ViewPagerAdapter(fm: Fragment): FragmentStateAdapter(fm) {
             2 -> {
                 val bundle = Bundle()
                 val calendar = Calendar.getInstance()
-                calendar.add(Calendar.DATE, -4)
+                calendar.add(Calendar.DATE, -20)
                 val yesterday1 = dateFormat.format(calendar.time)
                 bundle.putString(BUNDLE_DAY, yesterday1)
                 DaysFragment.newInstance(bundle)
