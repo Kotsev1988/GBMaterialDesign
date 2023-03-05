@@ -24,7 +24,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/barrierFirst"
         app:layout_constraintTop_toBottomOf="@+id/marsRover"
-        app:layout_constraintBottom_toTopOf="@id/barrierSecond"
         />
 
     <androidx.constraintlayout.widget.Group
@@ -38,63 +37,46 @@
         />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.TextButton"
         android:id="@+id/imageButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintWidth_percent="0.3"
-        android:text="@string/image"
+        android:text="@string/Image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.TextButton"
         android:id="@+id/roverButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/rover"
+        android:text="@string/Rover"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/barrierFirst"
         app:layout_constraintTop_toBottomOf="@id/imageButton"
         />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.TextButton"
         android:id="@+id/cameraButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/camera"
+        android:text="@string/Camera"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/barrierFirst"
         app:layout_constraintTop_toBottomOf="@id/roverButton"
         />
-
-    <Button
-        android:id="@+id/hideButtons"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/hide_3_button_using_groups"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cameraButton"
-        app:layout_constraintBottom_toTopOf="@id/barrierSecond"
-        app:layout_constraintWidth_percent="0.3"
-        />
-
-
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
-        app:constraint_referenced_ids="imageButton, roverButton, cameraButton, hideButtons"
-        />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierSecond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="imageButton, roverButton, cameraButton, hideButtons"
-
+        app:constraint_referenced_ids="imageButton, roverButton, cameraButton"
         />
 
     <TextView
@@ -103,8 +85,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/barrierSecond"
         app:layout_constraintStart_toEndOf="@id/barrierFirst"
+        app:layout_constraintTop_toBottomOf="@+id/marsPicture"
         />
 
 

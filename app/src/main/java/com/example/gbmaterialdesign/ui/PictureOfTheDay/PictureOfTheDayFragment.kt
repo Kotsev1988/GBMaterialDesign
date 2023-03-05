@@ -114,7 +114,7 @@ class PictureOfTheDayFragment : Fragment() {
                 }
 
                 requireActivity()?.let {
-                    binding.description.typeface = Typeface.createFromAsset(it.assets, "alladin/KryptapersonaluseExtrabold-L3oVD.otf")
+                    binding.description.typeface = Typeface.createFromAsset(it.assets, "FontyRegularFonty/FontyRegularFonty-lRey.ttf")
                 }
 
                 binding.description.text = it.pictureOfTheDay.explanation

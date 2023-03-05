@@ -26,9 +26,6 @@ class MyBehavior(context: Context, attributeSet: AttributeSet): CoordinatorLayou
 
         if (dependency is AppBarLayout){
 
-            println("@@@ "+child.y)
-            println("@@@@D "+dependency.y)
-
             child.y = (dependency.y + dependency.height).toFloat()
         }
         return super.onDependentViewChanged(parent, child, dependency)

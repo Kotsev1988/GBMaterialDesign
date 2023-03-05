@@ -5,7 +5,7 @@
     <item
         android:id="@+id/bottom_home"
         android:icon="@drawable/ic_home"
-        android:title="@string/home"
+        android:title="@string/Home"
         />
     <item
         android:id="@+id/bottom_earth"
@@ -15,12 +15,12 @@
     <item
         android:id="@+id/bottom_mars"
         android:icon="@drawable/ic_mars"
-        android:title="@string/mars"
+        android:title="@string/Mars"
         />
     <item
         android:id="@+id/bottom_system"
         android:icon="@drawable/ic_system"
-        android:title="@string/system"
+        android:title="@string/System"
         />
 
     <item

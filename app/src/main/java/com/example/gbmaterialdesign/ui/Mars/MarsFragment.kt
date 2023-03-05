@@ -58,15 +58,6 @@ class MarsFragment : Fragment() {
 
         viewModel.getMarsPicture()
 
-        binding.hideButtons.setOnClickListener {
-            if (flag) {
-                binding.groups.visibility = View.INVISIBLE
-                flag = !flag
-            } else {
-                binding.groups.visibility = View.VISIBLE
-            }
-        }
-
         binding.optionOne.apply {
             alpha = 0f
         }
@@ -74,8 +65,6 @@ class MarsFragment : Fragment() {
         binding.optionTwo.apply {
             alpha = 0f
         }
-
-
 
         binding.fab.setOnClickListener {
 

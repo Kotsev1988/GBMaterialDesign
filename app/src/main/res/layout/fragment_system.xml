@@ -83,7 +83,7 @@
         android:id="@+id/buttonForText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home"
+        android:text="@string/Home"
         app:layout_behavior=".ui.SolarSystem.behaviors.BehaviorButton"
         />
 
