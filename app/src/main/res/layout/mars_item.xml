@@ -5,61 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
-    <LinearLayout
-        android:id="@+id/editItemsMars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/addItemMars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#AC6A6A"
-            app:srcCompat="@drawable/ic_plus_fab" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/removeItemMars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#E69E9E"
-            app:srcCompat="@drawable/ic_archive" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/moveItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/editItemsMars"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/moveUPItemMars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#BDACAC"
-            app:srcCompat="@drawable/ic_arrow_drop_up" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/moveDownItemMars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#EFD0D0"
-            app:srcCompat="@drawable/ic_arrow_drop_down" />
-
-    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/marsItemPicture"
@@ -73,16 +18,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:layout_constraintEnd_toStartOf="@id/editItemsMars"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/marsItemPicture"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,63 +6,6 @@
     android:layout_margin="10dp"
     >
 
-    <LinearLayout
-        android:id="@+id/editItemsSolar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/addItemSolar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_plus_fab"
-            android:background="#B17575"
-            android:layout_margin="5dp"
-            />
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/removeItemSolar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_archive"
-            android:background="#B87474"
-            android:layout_margin="5dp"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/moveItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/editItemsSolar"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/moveUPItemSolar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#BDACAC"
-            app:srcCompat="@drawable/ic_arrow_drop_up" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/moveDownItemSolar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#EFD0D0"
-            app:srcCompat="@drawable/ic_arrow_drop_down" />
-
-    </LinearLayout>
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/solar_picture"
         android:layout_width="60dp"
@@ -70,8 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-    
-    
+
 
     <TextView
         android:id="@+id/solarItemText"
@@ -79,10 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:lines="2"
-        app:layout_constraintEnd_toStartOf="@id/moveItem"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/solar_picture"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/solarFullText"
@@ -90,18 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/editItemsSolar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/solar_picture"
         />
     
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

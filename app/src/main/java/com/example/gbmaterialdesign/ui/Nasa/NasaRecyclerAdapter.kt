@@ -147,35 +147,7 @@ class NasaRecyclerAdapter(
                 .thumbnail()
                 .into(img)
 
-            binding.addItemEarth.setOnClickListener {
-                addItem.add(layoutPosition)
-            }
 
-            binding.removeItemEarth.setOnClickListener {
-                removeItem.remove(layoutPosition)
-            }
-
-            binding.moveUPItemEarth.setOnClickListener {
-                layoutPosition.takeIf {
-                    it > 1
-                }?.also { currentPosition ->
-                    dataList.removeAt(currentPosition).apply {
-                        dataList.add(currentPosition - 1, this)
-                    }
-                    notifyItemMoved(currentPosition, currentPosition - 1)
-                }
-            }
-
-            binding.moveDownItemEarth.setOnClickListener {
-                layoutPosition.takeIf {
-                    it < dataList.size - 1
-                }?.also { currentPosition ->
-                    dataList.removeAt(currentPosition).apply {
-                        dataList.add(currentPosition + 1, this)
-                    }
-                    notifyItemMoved(currentPosition, currentPosition + 1)
-                }
-            }
         }
 
         override fun onItemSelected() {
@@ -195,9 +167,7 @@ class NasaRecyclerAdapter(
         private val name: TextView = itemView.findViewById(R.id.marsText)
         private val img: ImageView = itemView.findViewById(R.id.marsItemPicture)
 
-        private val removeMars: ImageView = itemView.findViewById(R.id.removeItemMars)
-        private val moveUpMars: ImageView = itemView.findViewById(R.id.moveUPItemMars)
-        private val moveDownMars: ImageView = itemView.findViewById(R.id.moveDownItemMars)
+
 
         override fun bind(data: Data) {
 
@@ -208,31 +178,6 @@ class NasaRecyclerAdapter(
                 .thumbnail()
                 .into(img)
 
-            removeMars.setOnClickListener {
-                removeItem.remove(layoutPosition)
-            }
-
-            moveUpMars.setOnClickListener {
-                layoutPosition.takeIf {
-                    it > 1
-                }?.also { currentPosition ->
-                    dataList.removeAt(currentPosition).apply {
-                        dataList.add(currentPosition - 1, this)
-                    }
-                    notifyItemMoved(currentPosition, currentPosition - 1)
-                }
-            }
-
-            moveDownMars.setOnClickListener {
-                layoutPosition.takeIf {
-                    it < dataList.size - 1
-                }?.also { currentPosition ->
-                    dataList.removeAt(currentPosition).apply {
-                        dataList.add(currentPosition + 1, this)
-                    }
-                    notifyItemMoved(currentPosition, currentPosition + 1)
-                }
-            }
         }
 
 
@@ -253,9 +198,7 @@ class NasaRecyclerAdapter(
         private val name: TextView = itemView.findViewById(R.id.solarItemText)
         private val name_full: TextView = itemView.findViewById(R.id.solarFullText)
 
-        private val removeSolar: ImageView = itemView.findViewById(R.id.removeItemSolar)
-        private val moveUpSolar: ImageView = itemView.findViewById(R.id.moveUPItemSolar)
-        private val moveDownSolar: ImageView = itemView.findViewById(R.id.moveDownItemSolar)
+
         override fun bind(data: Data) {
             name.text = data.solar?.messageBody
 
@@ -268,31 +211,6 @@ class NasaRecyclerAdapter(
                 name_full.text = data.solar?.messageBody
             }
 
-            removeSolar.setOnClickListener {
-                removeItem.remove(layoutPosition)
-            }
-
-            moveUpSolar.setOnClickListener {
-                layoutPosition.takeIf {
-                    it > 1
-                }?.also { currentPosition ->
-                    dataList.removeAt(currentPosition).apply {
-                        dataList.add(currentPosition - 1, this)
-                    }
-                    notifyItemMoved(currentPosition, currentPosition - 1)
-                }
-            }
-
-            moveDownSolar.setOnClickListener {
-                layoutPosition.takeIf {
-                    it < dataList.size - 1
-                }?.also { currentPosition ->
-                    dataList.removeAt(currentPosition).apply {
-                        dataList.add(currentPosition + 1, this)
-                    }
-                    notifyItemMoved(currentPosition, currentPosition + 1)
-                }
-            }
 
         }
 

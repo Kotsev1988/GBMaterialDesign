@@ -29,9 +29,6 @@ class BehaviorButton(context: Context, attributeSet: AttributeSet): CoordinatorL
 
             child.y = dependency.y+(dependency.height-child.height/2)
             child.x = (dependency.width - child.width ).toFloat()
-
-            println("DEP.Y "+dependency.y + "DEP.Y "+abs(dependency.y) + " DEP.H "+dependency.height)
-
             child.alpha = (1 - (abs(dependency.y)/(dependency.height/2))).toFloat()
 
         }

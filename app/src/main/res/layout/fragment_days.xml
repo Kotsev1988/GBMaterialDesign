@@ -8,25 +8,85 @@
     android:orientation="vertical"
     tools:context=".ui.Earth.EarthFragment">
 
-    <TextView
-        android:id="@+id/dateOfPicture"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
-    <com.example.gbmaterialdesign.ui.utils.MyImageView
-        android:id="@+id/todayPicture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateOfPicture"
-         />
+        <LinearLayout
+            android:id="@+id/dayDatas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dateOfPicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="@color/textDarkPrimary"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.gbmaterialdesign.ui.utils.MyImageView
+                android:id="@+id/todayPicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateOfPicture" />
+
+
+            <TextView
+                android:id="@+id/centroidCoordinates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/dscovrJ2000Position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/lunarJ2000Position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/sunJ2000Position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/attitudeQuaternions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
         android:id="@+id/frameLoadingDay"

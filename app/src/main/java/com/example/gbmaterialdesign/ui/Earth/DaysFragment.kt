@@ -3,7 +3,9 @@ package com.example.gbmaterialdesign.ui.Earth
 import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.style.BulletSpan
 import android.text.style.TypefaceSpan
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -78,69 +80,85 @@ class DaysFragment : Fragment() {
                 val earth_date: String
                 val earth = it.earthPicture
 
+                val picture = earth[0].image
+
+                earth_date = earth[0].date.let {
+                    it.substring(0, it.indexOf(" "))
+                }.replace("-", "/")
+
+                val url =
+                    "https://epic.gsfc.nasa.gov/archive/natural/" + earth_date + "/png/" + picture + ".png"
 
 
-                    val picture = earth[0].image
+                val transitionSet = TransitionSet()
+                val fade = Fade()
+                fade.duration = 2000
+                val bounds = ChangeBounds()
+                bounds.duration = 2000
+                transitionSet.addTransition(fade)
+                transitionSet.addTransition(bounds)
+                val slide = Slide(Gravity.END)
+                transitionSet.addTransition(slide)
 
-                    earth_date = earth[0].date.let {
-                        it.substring(0, it.indexOf(" "))
-                    }.replace("-", "/")
+                TransitionManager.beginDelayedTransition(binding.daysContainer, transitionSet)
+                binding.todayPicture.load(
+                    url
+                ) {
 
-                    val url =
-                        "https://epic.gsfc.nasa.gov/archive/natural/" + earth_date + "/png/" + picture + ".png"
+                    lifecycle(this@DaysFragment)
+                    crossfade(true)
+                }
+                val params: ViewGroup.LayoutParams = binding.todayPicture.layoutParams
+                var scaleType: ImageView.ScaleType
 
+                binding.todayPicture.setOnClickListener {
 
-                    val transitionSet = TransitionSet()
-                    val fade = Fade()
-                    fade.duration = 2000
-                    val bounds = ChangeBounds()
-                    bounds.duration = 2000
-                    transitionSet.addTransition(fade)
-                    transitionSet.addTransition(bounds)
-                    val slide = Slide(Gravity.END)
-                    transitionSet.addTransition(slide)
+                    flag = !flag
+                    if (flag) {
+                        it.animate().alpha(1f).setDuration(3000).start()
 
-                    TransitionManager.beginDelayedTransition(binding.daysContainer, transitionSet)
-                    binding.todayPicture.load(
-                        url
-                    ) {
+                        params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                        scaleType = ImageView.ScaleType.CENTER_CROP
 
-                        lifecycle(this@DaysFragment)
-                        crossfade(true)
+                    } else {
+
+                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        scaleType = ImageView.ScaleType.FIT_CENTER
                     }
-                    val params: ViewGroup.LayoutParams = binding.todayPicture.layoutParams
-                    var scaleType: ImageView.ScaleType
-
-
-
-                    binding.todayPicture.setOnClickListener {
-
-
-                        flag = !flag
-                        if (flag) {
-                            it.animate().alpha(1f).setDuration(3000).start()
-
-                            params.height = ViewGroup.LayoutParams.MATCH_PARENT
-                            scaleType = ImageView.ScaleType.CENTER_CROP
-
-                        } else {
-
-                            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                            scaleType = ImageView.ScaleType.FIT_CENTER
-                        }
-                        binding.todayPicture.layoutParams = params
-                        binding.todayPicture.scaleType = scaleType
-                    }
+                    binding.todayPicture.layoutParams = params
+                    binding.todayPicture.scaleType = scaleType
+                }
 
                 val string = it.earthPicture.get(0).caption
                 val spannable = SpannableStringBuilder(string)
 
-                val typeface = ResourcesCompat.getFont(requireContext(), R.font.aladin)
-                spannable.setSpan(typeface?.let { it1 -> TypefaceSpan(it1) }, 0, string.length, SpannableStringBuilder.SPAN_EXCLUSIVE_INCLUSIVE)
 
 
-                spannable.insert(string.length, earth_date)
-                    binding.dateOfPicture.text = spannable
+                binding.dateOfPicture.text = spannable
+
+                val spannableCoordinator = SpannableString(earth[0].centroid_coordinates.toString())
+
+                spannableCoordinator.setSpan(BulletSpan(100,
+                    ContextCompat.getColor(requireContext(), R.color.textDarkSecondary), 10),
+                    0,
+                    spannableCoordinator.length,
+                    SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+                binding.centroidCoordinates.text = spannableCoordinator
+
+                binding.dscovrJ2000Position.text =
+                    setSpan(earth[0].dscovr_j2000_position.toString(), spannable)
+
+                binding.lunarJ2000Position.text =
+                    setSpan(earth[0].lunar_j2000_position.toString(), spannable)
+
+                binding.sunJ2000Position.text =
+                    setSpan(earth[0].sun_j2000_position.toString(), spannable)
+
+                binding.attitudeQuaternions.text =
+                    setSpan(earth[0].attitude_quaternions.toString(), spannable)
+
 
             }
             is AppStateEarth.Error -> {
@@ -158,6 +176,21 @@ class DaysFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+
+    @SuppressLint("NewApi")
+    fun setSpan(text: String, span: SpannableStringBuilder): SpannableStringBuilder {
+        val spannableText = SpannableStringBuilder(text)
+
+        spannableText.setSpan(BulletSpan(100,
+            ContextCompat.getColor(requireContext(), R.color.textDarkSecondary), 10),
+            0,
+            spannableText.toString().length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        return spannableText
+    }
+
 
     companion object {
         const val BUNDLE_DAY = "Day"

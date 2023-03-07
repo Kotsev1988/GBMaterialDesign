@@ -1,17 +1,13 @@
 package com.example.gbmaterialdesign.ui.SolarSystem
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.red
-import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.BulletSpan
-import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.URLSpan
 import android.util.Patterns
@@ -20,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,7 +30,6 @@ import java.util.*
 
 class SystemFragment : Fragment() {
 
-
     private var _binding: FragmentSystemBinding? = null
     private val binding get() = _binding!!
 
@@ -41,14 +37,12 @@ class SystemFragment : Fragment() {
         ViewModelProvider(this)[SolarSystemViewModel::class.java]
     }
 
-    val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
+    private val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
 
     lateinit var spannableRainBow: SpannableString
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
@@ -61,6 +55,8 @@ class SystemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         viewModel.getSolarSystemLiveData().observe(viewLifecycleOwner, Observer {
             renderData(it)
@@ -84,23 +80,16 @@ class SystemFragment : Fragment() {
             is AppStateSolarSystem.Success -> {
                 binding.frameLoadingSS.visibility = View.GONE
 
-                val string = it.solarSystemWeather.get(it.solarSystemWeather.size-1).messageBody
+                val string = it.solarSystemWeather.get(it.solarSystemWeather.size - 1).messageBody
                 val spannable = SpannableString(string)
 
-                spannable.setSpan(BulletSpan(100, ContextCompat.getColor(requireContext(), R.color.myColor), 10), 0, string.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE )
+                spannable.setSpan(BulletSpan(100, ContextCompat.getColor(requireContext(),
+                    R.color.textDarkSecondary), 10), 0,
+                    string.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-
-                spannable.setSpan(ForegroundColorSpan(Color.MAGENTA), 10, string.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-
-                for(i in string.indices){
-                    if (string[i].toString()=="t"){
-                        spannable.setSpan(ForegroundColorSpan(Color.RED), i, i+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    }
-                }
 
                 var url = ""
-                var startURL : Int =-1
+                var startURL: Int = -1
                 var endURL: Int = -1
                 val matcher = Patterns.WEB_URL.matcher(string)
                 while (matcher.find()) {
@@ -109,14 +98,12 @@ class SystemFragment : Fragment() {
 
                     startURL = matcher.start()
                     endURL = matcher.end()
-                    spannable.setSpan(URLSpan(url) , startURL, endURL, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    spannable.setSpan(URLSpan(url), startURL, endURL,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
-
 
                 binding.systemText.movementMethod = LinkMovementMethod.getInstance()
                 binding.systemText.text = spannable
-
-
 
                 Glide.with(requireActivity())
                     .load(url)
@@ -124,7 +111,6 @@ class SystemFragment : Fragment() {
 
                 //spannableRainBow =SpannableString(string) //- окрашивание символов в цвета радуги
                 //rainbow(1)
-
 
             }
             is AppStateSolarSystem.Error -> {
@@ -146,13 +132,13 @@ class SystemFragment : Fragment() {
         fun newInstance() = SystemFragment()
     }
 
-    fun rainbow(i: Int = 1){
+    fun rainbow(i: Int = 1) {
         var currentCount = i
 
-        val x = object : CountDownTimer(2000, 200){
+        val x = object : CountDownTimer(2000, 200) {
             override fun onTick(p0: Long) {
                 colorText(currentCount)
-                currentCount = if (++currentCount>5) 1 else currentCount
+                currentCount = if (++currentCount > 5) 1 else currentCount
             }
 
             override fun onFinish() {
@@ -162,9 +148,9 @@ class SystemFragment : Fragment() {
         x.start()
     }
 
-    private fun colorText(colorFirstNumber: Int){
+    private fun colorText(colorFirstNumber: Int) {
         binding.systemText.setText(spannableRainBow, TextView.BufferType.SPANNABLE)
-        spannableRainBow =  binding.systemText.text as SpannableString
+        spannableRainBow = binding.systemText.text as SpannableString
         val map = mapOf(
             0 to ContextCompat.getColor(requireContext(), R.color.red),
             1 to ContextCompat.getColor(requireContext(), R.color.orange),
@@ -180,22 +166,22 @@ class SystemFragment : Fragment() {
             ForegroundColorSpan::class.java
         )
 
-        for (span in spans){
+        for (span in spans) {
             spannableRainBow.removeSpan(span)
         }
 
         var colorNumber = colorFirstNumber
 
-        for (i in 0 until binding.systemText.text.length){
+        for (i in 0 until binding.systemText.text.length) {
             if (colorNumber == 5) {
 
-                colorNumber =0
+                colorNumber = 0
             } else {
-                colorNumber +=1
+                colorNumber += 1
             }
             spannableRainBow.setSpan(
                 ForegroundColorSpan(map.getValue(colorNumber)),
-                i, i+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
     }

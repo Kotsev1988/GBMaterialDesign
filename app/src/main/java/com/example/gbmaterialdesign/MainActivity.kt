@@ -1,12 +1,13 @@
 package com.example.gbmaterialdesign
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import com.example.gbmaterialdesign.databinding.ActivityMainBinding
 import com.example.gbmaterialdesign.ui.CURRENT_THEME
 import com.example.gbmaterialdesign.ui.KEY_SP
-
 
 const val ThemeOne = 0
 const val ThemeSecond = 1
@@ -19,10 +20,12 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        setTheme(getRealStyleLocal(getCurrentThemeLocal()))
+        //setTheme(getRealStyleLocal(getCurrentThemeLocal()))
+       // setTheme(R.style.Theme_GBMaterialDesign)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
     }
 
     fun getCurrentThemeLocal(): Int {
@@ -48,6 +51,5 @@ class MainActivity : AppCompatActivity() {
             1 -> R.style.AppTheme
             else -> -1
         }
-
     }
 }

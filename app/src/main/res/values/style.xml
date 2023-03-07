@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyChip" parent="Widget.Material3.Chip.Suggestion">
+        <item name="textAppearanceTitleMedium">@style/MyTextAppearance</item>
+        <item name="textAppearanceBodySmall">@style/MyTextAppearance</item>
+        <item name="chipBackgroundColor">#95CBF6</item>
+        <item name="rippleColor">#418FCF</item>
+        <item name="shapeAppearanceOverlay">@style/MyShapeAppearance</item>
+    </style>
+
+    <style name="MyText" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="helperTextTextColor">#8BE48E</item>
+        <item name="boxBackgroundColor">#DAD28E</item>
+        <item name="colorOnSurface">#0C0300</item>
+        <item name="placeholderTextAppearance">@style/MyTextAppearance</item>
+        <item name="helperTextTextAppearance">@style/MyTextAppearance</item>
+        <item name="shapeAppearanceOverlay">@style/MyTextAppearance</item>
+        <item name="hintTextAppearance">@style/MyTextAppearance</item>
+        <item name="counterTextAppearance">@style/MyTextAppearance</item>
+        <item name="counterOverflowTextAppearance">@style/MyTextAppearance</item>
+
+    </style>
+
+    <style name="MyTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/aladin</item>
+        <item name="android:fontFamily">@font/aladin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.0178571429</item>
+    </style>
+
+    <style name="MyShapeAppearance" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="MyFab" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">#5AA1C4</item>
+        <item name="borderWidth">10dp</item>
+        <item name="elevation">10dp</item>
+        <item name="enforceMaterialTheme">false</item>
+        <item name="rippleColor">#DF8CF4</item>
+        <item name="showMotionSpec">@null</item>
+        <item name="hideMotionSpec">@null</item>
+    </style>
+
+    <style name="MyBottomAppBarStyle" parent="Widget.Material3.BottomAppBar">
+        <item name="backgroundTint">#9070CA</item>
+        <item name="navigationIconTint">#CDBAEF</item>
+    </style>
+
+    <style name="MyBottomNavBar" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">#5D99C8</item>
+        <item name="itemTextAppearanceActive">@style/MyText</item>
+        <item name="itemRippleColor">#043D6A</item>
+    </style>
+
+    <style name="AppTheme" parent="Base.Theme.GBMaterialDesign">
+
+        <item name="colorPrimary">#912222</item>
+        <item name="colorPrimaryDark">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">#827991</item>
+        <item name="colorPrimaryInverse">#36B0BF</item>
+        <item name="colorPrimaryContainer">#7FDF10</item>
+        <item name="colorOnPrimaryContainer">#DC880D</item>
+        <item name="colorSecondary">#918E97</item>
+        <item name="colorOnSecondary">#52D5E6</item>
+        <item name="colorSecondaryContainer">#495938</item>
+        <item name="colorOnSecondaryContainer">#10023E</item>
+        <item name="colorTertiary">#774B3E</item>
+        <item name="chipBackgroundColor">#2196F3</item>
+        <item name="rippleColor">#2569A1</item>
+        <item name="textInputOutlinedStyle">@style/MyTextAppTheme</item>
+        <item name="chipStyle">@style/MyChipAppTheme</item>
+        <item name="bottomAppBarStyle">@style/MyBottomAppBarStyleAppTheme</item>
+        <item name="textAppearanceBody2">@style/MyTextAppearanceAppTheme</item>
+        <item name="textAppearanceBodyLarge">@style/MyTextAppearanceAppTheme</item>
+    </style>
+
+
+    <style name="MyTextAppTheme" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <item name="helperTextTextColor">#8BC34A</item>
+        <item name="boxBackgroundColor">#77AEB5</item>
+        <item name="colorOnSurface">#D1704F</item>
+        <item name="placeholderTextAppearance">@style/MyTextAppearanceAppTheme</item>
+        <item name="helperTextTextAppearance">@style/MyTextAppearanceAppTheme</item>
+        <item name="shapeAppearanceOverlay">@style/MyTextAppearanceAppTheme</item>
+        <item name="hintTextAppearance">@style/MyTextAppearanceAppTheme</item>
+        <item name="counterTextAppearance">@style/MyTextAppearanceAppTheme</item>
+        <item name="counterOverflowTextAppearance">@style/MyTextAppearanceAppTheme</item>
+        <item name="android:textAppearance">@style/MyTextAppearanceAppTheme</item>
+    </style>
+
+
+    <style name="MyChipAppTheme" parent="Widget.Material3.Chip.Suggestion">
+        <item name="android:textAppearance">@style/MyTextAppearanceAppTheme</item>
+        <item name="chipBackgroundColor">#46E44C</item>
+        <item name="rippleColor">#2569A1</item>
+        <item name="shapeAppearanceOverlay">@style/MyShapeAppearance</item>
+    </style>
+
+    <style name="MyTextAppearanceAppTheme" parent="TextAppearance.Material3.BodyLarge">
+
+        <item name="fontFamily">@font/aladin</item>
+        <item name="android:fontFamily">@font/aladin</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.0178571429</item>
+    </style>
+
+    <style name="MyBottomAppBarStyleAppTheme" parent="Widget.Material3.BottomAppBar">
+        <item name="backgroundTint">#7FDFD6</item>
+        <item name="navigationIconTint">#8EDF91</item>
+    </style>
+
+
+</resources>
