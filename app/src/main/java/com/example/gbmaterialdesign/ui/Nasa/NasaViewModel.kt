@@ -3,7 +3,7 @@ package com.example.gbmaterialdesign.ui.Nasa
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.lifecycle.viewModelScope
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.EarthRepositoryImpl
 import com.example.gbmaterialdesign.data.Retrofits.EarthRetrofit.RetrofitEarthClient
 import com.example.gbmaterialdesign.data.Retrofits.MarsRetrofit.MarsRepositoryImpl
@@ -17,8 +17,6 @@ import com.example.gbmaterialdesign.model.repository.EarthRepository
 import com.example.gbmaterialdesign.model.repository.MarsRepository
 import com.example.gbmaterialdesign.model.repository.SolarSystemRepository
 import com.example.gbmaterialdesign.ui.AppSatates.AppStateNasa
-import com.example.gbmaterialdesign.ui.TouchHelper.ItemTouchHelperCallback
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,7 +31,7 @@ class NasaViewModel (
             private val repository: SolarSystemRepository = SolarSystemImpl(RetrofitClient())
 ): ViewModel() {
 
-    val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
+    private val dateFormat: DateFormat = SimpleDateFormat("YYYY-MM-dd")
 
     private var dataList: MutableList<Pair<Data, Boolean>> = mutableListOf()
     private var newDataList: MutableList<Pair<Data, Boolean>> = mutableListOf()
@@ -48,7 +46,7 @@ class NasaViewModel (
     fun getNasaLiveData(): LiveData<AppStateNasa> = liveDataNasa
 
     fun getLists(){
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
 
 
             val calendar = Calendar.getInstance()
@@ -127,7 +125,7 @@ class NasaViewModel (
         calendar.add(Calendar.DATE, -3)
         val day = dateFormat.format(calendar.time)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
 
             val response = repositoryEarth.getEarthPictureRecycler(day)
             val earthBody = response.body()?.get(0)
